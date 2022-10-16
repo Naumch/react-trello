@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import uniqid from 'uniqid';
 import BtnAddList from './BtnAddList';
+import Lists from './Lists';
 
 const initNotes = [
-  {id: uniqid(), listTitle: ''}
+  {id: uniqid(), listTitle: 'ToDo', cards: [
+    {id: uniqid(), cardName: 'Лечить Одрюшу'}
+  ]}
 ]
 
 function App() {
@@ -11,7 +14,10 @@ function App() {
 
   return (
     <div className='container'>
-      <BtnAddList notes={notes} setNotes={setNotes}/>
+      <div className='wrapper'>
+        <Lists notes={notes}/>
+        <BtnAddList notes={notes} setNotes={setNotes}/>
+      </div>
     </div>
   );
 }

@@ -7,24 +7,24 @@ function BtnAddList({ notes, setNotes }) {
 
   return (
     readyToAdd
-      ? <div className='card-add'>
+      ? <div className='list-add'>
           <input 
             placeholder='Ввести заголовок списка'
-            className='card-add__input' 
+            className='list-add__input' 
             value={listTitle} 
             onChange={e => setListTitle(e.target.value)}
           />
           <button 
-            className='card-add__btn-add'
+            className='list-add__btn-add'
             onClick={() => {
-              setNotes([...notes, {id: uniqid(), listTitle: listTitle}]);
+              setNotes([...notes, {id: uniqid(), listTitle: listTitle, cards: []}]);
               setReadyToAdd(false);
             }}
           >
             Добавить список
           </button>
           <button 
-            className='card-add__btn-cancel'
+            className='list-add__btn-cancel'
             onClick={() => setReadyToAdd(false)}
           >
             &#10006;
