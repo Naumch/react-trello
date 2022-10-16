@@ -1,15 +1,17 @@
 import React from 'react';
 import List from './List';
 
-function Lists({ notes }) {
+function Lists({ notes, setNotes, listTitle, setListTitle }) {
 
   const result = notes.map(note => {
     return (
       <List 
         key={note.id}
-        id={note.id} 
-        listTitle={note.listTitle}
-        cards={note.cards}
+        note={note}
+        notes={notes}
+        setNotes={setNotes}
+        listTitle={listTitle}
+        setListTitle={setListTitle}
       />
     )
   })

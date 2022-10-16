@@ -11,12 +11,23 @@ const initNotes = [
 
 function App() {
   const [notes, setNotes] = useState(initNotes);
+  const [listTitle, setListTitle] = useState('');
 
   return (
     <div className='container'>
       <div className='wrapper'>
-        <Lists notes={notes}/>
-        <BtnAddList notes={notes} setNotes={setNotes}/>
+        <Lists 
+          notes={notes}
+          setNotes={setNotes}
+          listTitle={listTitle}
+          setListTitle={setListTitle}
+        />
+        <BtnAddList 
+          notes={notes} 
+          setNotes={setNotes}
+          listTitle={listTitle}
+          setListTitle={setListTitle}
+        />
       </div>
     </div>
   );

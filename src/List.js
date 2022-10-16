@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Card from './Card';
 
-function List({ id, listTitle, cards }) {
+function List({ note, notes, setNotes, listTitle, setListTitle }) {
+  const [readyToEdit, setReadyToEdit] = useState(false);
 
-  const result = cards.map(card => {
+  const result = note.cards.map(card => {
     return (
       <Card 
         key={card.id} 
@@ -12,9 +13,39 @@ function List({ id, listTitle, cards }) {
     )
   })
 
+  function editTitle(e) {
+    if (e.keyCode === 13) {
+      setNotes(notes.map(res => {
+        if (note.id === res.id) {
+          return {...res, listTitle: listTitle};
+        } else {
+          return res;
+        }
+      }))
+      setReadyToEdit(false);
+      setListTitle('');
+    }
+  }
+
   return (
     <div className='list'>
-      <div className='list__title'>{listTitle}</div>
+      {readyToEdit 
+        ? <input 
+            value={listTitle} 
+            onChange={e => setListTitle(e.target.value)}
+            className='list-edit__input'
+            onKeyDown={e => editTitle(e)}
+          />
+        : <div 
+            className='list__title'
+            onClick={() => {
+              setListTitle(note.listTitle)
+              setReadyToEdit(true);
+            }}
+          >
+            {note.listTitle}
+          </div>
+      }
       {result}
       <button className='card-add__btn'>
         <span className='card-add__btn-span'>+</span>

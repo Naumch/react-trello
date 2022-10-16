@@ -94,10 +94,6 @@ button {
   border-color:#0079be;
 }
 
-.list-add__input:active {
-  border-color:#0079be;
-}
-
 .list-add__btn-add {
   background-color: #0675be;
   padding: 8px 12px;
@@ -114,6 +110,17 @@ button {
   color: #515d74;
   font-size: 18px;
   line-height: 0;
+}
+
+.list-edit__input {
+  border: 2px solid #0079be;
+  border-radius: 4px;
+  padding: 5px;
+}
+
+.list-edit__input:focus {
+  outline: none;
+  border-color:#0079be;
 }
 
 .card {
