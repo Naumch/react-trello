@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Card from './Card';
 import ListTitle from './ListTitle';
 import uniqid from 'uniqid';
+import ActionsList from './ActionsList';
 
 function List({ note, notes, setNotes, listTitle, setListTitle }) {
   const [readyToAddCard, setReadyToAddCard] = useState(false);
@@ -25,8 +26,6 @@ function List({ note, notes, setNotes, listTitle, setListTitle }) {
       setCardName('');
     }
   }
-
-  
 
   const result = note.cards.map(card => {
     return (
@@ -87,39 +86,15 @@ function List({ note, notes, setNotes, listTitle, setListTitle }) {
             Добавить карточку
           </button>
       }
-      {workingWithList 
-        ? <div className='list-actions'>
-            <div className='list-actions__top'>
-              <p className='list-actions__top-text'>Действия со списком</p>
-              <button 
-                onClick={() => setWorkingWithList(false)}
-                className='list-actions__top-btn'
-              >
-                &#10006;
-              </button>
-            </div> 
-            <ul className='list-actions__menu'>
-              <li className='list-actions__menu-item'>
-                Копировать список...
-              </li>
-              <li className='list-actions__menu-item'>
-                Удалить все карточки списка...
-              </li>
-              <li 
-                onClick={() => setNotes(notes.filter(elem => elem.id !== note.id))} 
-                className='list-actions__menu-item'
-              >
-                Удалить список...
-              </li>
-            </ul>
-          </div>
-        : <></>  
-      }
+      <ActionsList 
+        workingWithList={workingWithList}
+        setWorkingWithList={setWorkingWithList}
+        note={note}
+        notes={notes}
+        setNotes={setNotes}
+      />
     </div>
   )
 }
 
 export default List;
-/*function deleteList(noteId) {
-  setNotes(notes.filter(elem => elem.id !== noteId));
-}*/
