@@ -37,6 +37,49 @@ button {
   flex-wrap: wrap;
 }
 
+.wrapper__button-black {
+  position: absolute;
+  top: 8px;
+  left: 260px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 200px;
+}
+
+.button-black {
+  background-color: rgb(27, 26, 26);
+  padding: 4px 10px;
+  border-radius: 4px;
+  margin-bottom: 4px;
+  transition: .5s;
+}
+
+.button-black:hover {
+  margin-left: 10px;
+}
+
+.button-black__icon {
+  margin-right: 6px;
+}
+
+.button {
+  background-color: #0675be;
+  padding: 8px 12px;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+.button:hover {
+  background-color: #0966a5;
+}
+
+.button-cancel {
+  color: #515d74;
+  font-size: 18px;
+  line-height: 0;
+}
+
 .button_transparent {
   background-color: #3e99cf;
   width: 275px;
@@ -179,6 +222,10 @@ button {
   background-color: #cecaca;
 }
 
+.box-textarea {
+  position: relative;
+}
+
 .textarea {
   padding: 6px 8px;
   border: none;
@@ -189,26 +236,9 @@ button {
   margin-top: 8px;
   margin-bottom: 8px;
   resize: vertical;
+  font-size: 15px;
 }
 
 .textarea:focus {
   outline: none;
-}
-
-.button-add {
-  background-color: #0675be;
-  padding: 8px 12px;
-  border-radius: 4px;
-  transition: .5s;
-  margin-right: 10px;
-}
-
-.button-add:hover {
-  background-color: #0966a5;
-}
-
-.button-cancel {
-  color: #515d74;
-  font-size: 18px;
-  line-height: 0;
 }

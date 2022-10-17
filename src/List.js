@@ -29,7 +29,10 @@ function List({ note, notes, setNotes, listTitle, setListTitle }) {
     return (
       <Card 
         key={card.id} 
-        name={card.cardName}
+        card={card}
+        note={note}
+        notes={notes}
+        setNotes={setNotes}
       />
     )
   })
@@ -52,9 +55,9 @@ function List({ note, notes, setNotes, listTitle, setListTitle }) {
               value={cardName}
               onChange={e => setCardName(e.target.value)}
               onKeyDown={e => checkKeydownEnter(e, cardName)}
-            ></textarea>
+            />
             <button 
-              className='button-add'
+              className='button'
               onClick={() => {
                 addCard(cardName);
                 setCardName('');

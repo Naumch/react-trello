@@ -23,7 +23,7 @@ function BtnAddList({ notes, setNotes, listTitle, setListTitle }) {
             onKeyDown={e => saveTitle(e)}
           />
           <button 
-            className='button-add'
+            className='button'
             onClick={() => {
               setNotes([...notes, {id: uniqid(), listTitle: listTitle, cards: []}]);
               setReadyToAddList(false);

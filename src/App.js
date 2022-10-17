@@ -5,7 +5,8 @@ import Lists from './Lists';
 
 const initNotes = [
   {id: uniqid(), listTitle: 'ToDo', cards: [
-    {id: uniqid(), cardName: 'Лечить Одрюшу'}
+    {id: uniqid(), cardName: 'Лечить Одрюшу'}, 
+    {id: uniqid(), cardName: 'Доделать Trello'}
   ]}
 ]
 
