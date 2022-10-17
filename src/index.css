@@ -71,6 +71,26 @@ button {
   font-weight: 500;
   cursor: pointer;
   margin-bottom: 10px;
+  display: flex;
+  justify-content: stretch;
+}
+
+.list__title-text {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+}
+
+.list__title-btn {
+  color: #000;
+  font-size: 20px;
+  font-weight: 700;
+  border-radius: 4px;
+  padding: 4px 5px;
+}
+
+.list__title-btn:hover {
+  background-color: #cecaca;
 }
 
 .list-add {
@@ -97,7 +117,9 @@ button {
 .list-edit__input {
   border: 2px solid #0079be;
   border-radius: 4px;
-  padding: 5px;
+  padding: 4px 5px;
+  margin-right: 6px;
+  flex-grow: 1;
 }
 
 .list-edit__input:focus {
@@ -110,9 +132,13 @@ button {
   border-radius: 4px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.2), 0 4px 6px rgba(0,0,0,0.2);
   cursor: pointer;
-  padding: 6px 8px;
+  padding: 4px 4px 4px 8px;
   margin-top: 8px;
   font-size: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: .5s;
 }
 
 .card:hover {
@@ -138,6 +164,19 @@ button {
   font-size: 24px;
   line-height: 0;
   margin-right: 8px;
+}
+
+.card-edit__btn {
+  color: #000;
+  transition: .3s;
+  border-radius: 4px;
+  padding: 5px 8px;
+  transform: rotate(180deg);
+  font-size: 15px;
+}
+
+.card-edit__btn:hover {
+  background-color: #cecaca;
 }
 
 .textarea {
