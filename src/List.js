@@ -1,25 +1,11 @@
 import React, { useState } from 'react';
 import Card from './Card';
+import ListTitle from './ListTitle';
 import uniqid from 'uniqid';
 
 function List({ note, notes, setNotes, listTitle, setListTitle }) {
-  const [readyToEditList, setReadyToEditList] = useState(false);
   const [readyToAddCard, setReadyToAddCard] = useState(false);
   const [cardName, setCardName] = useState('');
-
-  function editTitle(e) {
-    if (e.keyCode === 13) {
-      setNotes(notes.map(res => {
-        if (note.id === res.id) {
-          return {...res, listTitle: listTitle};
-        } else {
-          return res;
-        }
-      }))
-      setReadyToEditList(false);
-      setListTitle('');
-    }
-  }
 
   function addCard(cardName) {
     setNotes(notes.map(res => {
@@ -50,26 +36,13 @@ function List({ note, notes, setNotes, listTitle, setListTitle }) {
 
   return (
     <div className='list'>
-      <div className='list__title'>
-        {readyToEditList 
-          ? <input 
-              value={listTitle} 
-              onChange={e => setListTitle(e.target.value)}
-              className='list-edit__input'
-              onKeyDown={e => editTitle(e)}
-            />
-          : <div
-              onClick={() => {
-                setListTitle(note.listTitle)
-                setReadyToEditList(true);
-              }}
-              className='list__title-text'
-            >
-              {note.listTitle}
-            </div>
-        }
-        <button className='list__title-btn'>&middot;&middot;&middot;</button>
-      </div>
+      <ListTitle 
+        note={note}
+        notes={notes}
+        setNotes={setNotes}
+        listTitle={listTitle}
+        setListTitle={setListTitle}
+      />
       {result}
       {readyToAddCard
         ? <div>
