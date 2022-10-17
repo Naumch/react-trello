@@ -94,24 +94,6 @@ button {
   border-color:#0079be;
 }
 
-.list-add__btn-add {
-  background-color: #0675be;
-  padding: 8px 12px;
-  border-radius: 4px;
-  transition: .5s;
-  margin-right: 10px;
-}
-
-.list-add__btn-add:hover {
-  background-color: #0966a5;
-}
-
-.list-add__btn-cancel {
-  color: #515d74;
-  font-size: 18px;
-  line-height: 0;
-}
-
 .list-edit__input {
   border: 2px solid #0079be;
   border-radius: 4px;
@@ -172,4 +154,22 @@ button {
 
 .textarea:focus {
   outline: none;
+}
+
+.button-add {
+  background-color: #0675be;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: .5s;
+  margin-right: 10px;
+}
+
+.button-add:hover {
+  background-color: #0966a5;
+}
+
+.button-cancel {
+  color: #515d74;
+  font-size: 18px;
+  line-height: 0;
 }

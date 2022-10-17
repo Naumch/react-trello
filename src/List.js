@@ -3,7 +3,7 @@ import Card from './Card';
 import uniqid from 'uniqid';
 
 function List({ note, notes, setNotes, listTitle, setListTitle }) {
-  const [readyToEdit, setReadyToEdit] = useState(false);
+  const [readyToEditList, setReadyToEditList] = useState(false);
   const [readyToAddCard, setReadyToAddCard] = useState(false);
   const [cardName, setCardName] = useState('');
 
@@ -16,7 +16,7 @@ function List({ note, notes, setNotes, listTitle, setListTitle }) {
           return res;
         }
       }))
-      setReadyToEdit(false);
+      setReadyToEditList(false);
       setListTitle('');
     }
   }
@@ -50,7 +50,7 @@ function List({ note, notes, setNotes, listTitle, setListTitle }) {
 
   return (
     <div className='list'>
-      {readyToEdit 
+      {readyToEditList 
         ? <input 
             value={listTitle} 
             onChange={e => setListTitle(e.target.value)}
@@ -61,7 +61,7 @@ function List({ note, notes, setNotes, listTitle, setListTitle }) {
             className='list__title'
             onClick={() => {
               setListTitle(note.listTitle)
-              setReadyToEdit(true);
+              setReadyToEditList(true);
             }}
           >
             {note.listTitle}
@@ -78,7 +78,7 @@ function List({ note, notes, setNotes, listTitle, setListTitle }) {
               onKeyDown={e => checkKeydownEnter(e, cardName)}
             ></textarea>
             <button 
-              className='list-add__btn-add'
+              className='button-add'
               onClick={() => {
                 addCard(cardName);
                 setCardName('');
@@ -87,7 +87,7 @@ function List({ note, notes, setNotes, listTitle, setListTitle }) {
               Добавить карточку
             </button>
             <button 
-              className='list-add__btn-cancel'
+              className='button-cancel'
               onClick={() => {
                 setReadyToAddCard(false);
                 setCardName('');
