@@ -108,6 +108,7 @@ button {
   border-radius: 4px;
   margin-right: 16px;
   margin-bottom: 24px;
+  position: relative;
 }
 
 .list__title {
@@ -134,6 +135,58 @@ button {
 
 .list__title-btn:hover {
   background-color: #cecaca;
+}
+
+.list-actions {
+  position: absolute;
+  top: 38px;
+  left: 224px;
+  background-color: #fff;
+  padding: 10px 10px 0;
+  width: 300px;
+  border-radius: 4px;
+  z-index: 50;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .2);
+  font-size: 14px;
+}
+
+.list-actions__top {
+  display: flex;
+  align-items: center;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #999fa6;
+  color: #999fa6;
+}
+
+.list-actions__top-text {
+  flex-grow: 1;
+  text-align: center;
+}
+
+.list-actions__top-btn {
+  color: #999fa6;
+  transition: .3s;
+}
+
+.list-actions__top-btn:hover {
+  color: #7f8083;
+}
+
+.list-actions__menu {
+  list-style: none;
+  margin-top: 10px;
+}
+
+.list-actions__menu-item {
+  margin-bottom: 10px;
+  transition: .3s;
+  padding: 4px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.list-actions__menu-item:hover {
+  background-color: #d0d0d0;
 }
 
 .list-add {

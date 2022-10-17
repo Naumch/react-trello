@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function ListTitle({ note, notes, setNotes, listTitle, setListTitle }) {
+function ListTitle({ note, notes, setNotes, listTitle, setListTitle, setWorkingWithList }) {
   const [readyToEditList, setReadyToEditList] = useState(false);
 
   function editTitle(e) {
@@ -36,7 +36,9 @@ function ListTitle({ note, notes, setNotes, listTitle, setListTitle }) {
             {note.listTitle}
           </div>
       }
-      <button className='list__title-btn'>&middot;&middot;&middot;</button>
+      <button onClick={() => setWorkingWithList(true)} className='list__title-btn'>
+        &middot;&middot;&middot;
+      </button>
     </div>
   )
 }
