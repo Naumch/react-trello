@@ -5,14 +5,14 @@ function Lists({ notes, setNotes, listTitle, setListTitle }) {
 
   const result = notes.map(note => {
     return (
-      <List 
-        key={note.id}
-        note={note}
-        notes={notes}
-        setNotes={setNotes}
-        listTitle={listTitle}
-        setListTitle={setListTitle}
-      />
+        <List 
+          key={note.id}
+          note={note}
+          notes={notes}
+          setNotes={setNotes}
+          listTitle={listTitle}
+          setListTitle={setListTitle}
+        />
     )
   })
 

@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
+import PopupCard from './PopupCard';
 
 function Card({ card, note, notes, setNotes }) {
   const [opacityBtn, setOpacityBtn] = useState(0);
   const [readyToEditCard, setReadyToEditCard] = useState(false);
   const [cardName, setCardName] = useState('');
+  const [readyToMoveCard, setReadyToMoveCard] = useState(false);
 
   function deleteCard(noteId, cardId) {
-    let result = {...note, cards: [...note.cards.filter(res => res.id !== cardId)]};
-    setNotes(notes.map(elem => elem.id === noteId ? result : elem));
+    setNotes(notes.map(elem => elem.id === noteId ? {...note, cards: [...note.cards.filter(res => res.id !== cardId)]} : elem));
   }
 
   function editCard(noteId, cardId, name) {
@@ -47,7 +48,7 @@ function Card({ card, note, notes, setNotes }) {
             <span className='button-black__icon'>&#10004;</span>
             Открыть карточку
           </button>
-          <button className='button-black'>
+          <button onClick={() => setReadyToMoveCard(true)} className='button-black'>
             <span className='button-black__icon'>&#8617;</span>
             Переместить
           </button>
@@ -56,6 +57,16 @@ function Card({ card, note, notes, setNotes }) {
             Удалить
           </button>
         </div>
+        <PopupCard 
+          readyToMoveCard={readyToMoveCard}
+          setReadyToMoveCard={setReadyToMoveCard}
+          card={card}
+          note={note}
+          notes={notes}
+          setNotes={setNotes}
+          deleteCard={deleteCard}
+          setReadyToEditCard={setReadyToEditCard}
+        />
       </div>
     : <div 
         className='card'

@@ -7,6 +7,9 @@ const initNotes = [
   {id: uniqid(), listTitle: 'ToDo', cards: [
     {id: uniqid(), cardName: 'Лечить Одрюшу'}, 
     {id: uniqid(), cardName: 'Доделать Trello'}
+  ]},
+  {id: uniqid(), listTitle: 'Doing', cards: [
+    {id: uniqid(), cardName: 'Лежу на диване'}
   ]}
 ]
 

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Card from './Card';
 import ListTitle from './ListTitle';
 import uniqid from 'uniqid';
-import ActionsList from './ActionsList';
+import PopupList from './PopupList';
 
 function List({ note, notes, setNotes, listTitle, setListTitle }) {
   const [readyToAddCard, setReadyToAddCard] = useState(false);
@@ -10,12 +10,12 @@ function List({ note, notes, setNotes, listTitle, setListTitle }) {
   const [workingWithList, setWorkingWithList] = useState(false);
 
   function addCard(cardName) {
-    setNotes(notes.map(res => {
-      if (note.id === res.id) {
+    setNotes(notes.map(elem => {
+      if (note.id === elem.id) {
         let obj = {id: uniqid(), cardName: cardName};
-        return {...res, cards: [...res.cards, obj]};
+        return {...elem, cards: [...elem.cards, obj]};
       } else {
-        return res;
+        return elem;
       }
     }))
   }
@@ -86,7 +86,7 @@ function List({ note, notes, setNotes, listTitle, setListTitle }) {
             Добавить карточку
           </button>
       }
-      <ActionsList 
+      <PopupList 
         workingWithList={workingWithList}
         setWorkingWithList={setWorkingWithList}
         note={note}
