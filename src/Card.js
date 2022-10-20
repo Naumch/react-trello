@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import PopupCard from './PopupCard';
+import { Link, useLocation } from 'react-router-dom';
 
 function Card({ card, note, notes, setNotes }) {
   const [opacityBtn, setOpacityBtn] = useState(0);
   const [readyToEditCard, setReadyToEditCard] = useState(false);
   const [cardName, setCardName] = useState('');
   const [readyToMoveCard, setReadyToMoveCard] = useState(false);
+
+  const location = useLocation();
 
   function deleteCard(noteId, cardId) {
     setNotes(notes.map(elem => elem.id === noteId ? {...note, cards: [...note.cards.filter(res => res.id !== cardId)]} : elem));
@@ -44,9 +47,11 @@ function Card({ card, note, notes, setNotes }) {
         />
         <button onClick={() => editCard(note.id, card.id, cardName)} className='button'>Сохранить</button>
         <div className='wrapper__button-black'> 
-          <button className='button-black'>
-            <span className='button-black__icon'>&#10004;</span>
-            Открыть карточку
+          <button className='button-black' onClick={() => setReadyToEditCard(false)}>
+            <Link to={{pathname: `/card/${card.id}`}} state={{ background: location }}>
+              <span className='button-black__icon'>&#10004;</span>
+              Открыть карточку
+            </Link>
           </button>
           <button onClick={() => setReadyToMoveCard(true)} className='button-black'>
             <span className='button-black__icon'>&#8617;</span>
@@ -72,8 +77,14 @@ function Card({ card, note, notes, setNotes }) {
         className='card'
         onMouseEnter={() => setOpacityBtn(1)}
         onMouseLeave={() => setOpacityBtn(0)}
-      >
-        {card.cardName}
+      >       
+        <Link 
+          to={{pathname: `/card/${card.id}`}} 
+          state={{ background: location }} 
+          style={{flexGrow: 1}}
+        >
+          {card.cardName}
+        </Link>
         <button 
           className='card-edit__btn'
           style={{opacity: `${opacityBtn}`}}

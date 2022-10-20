@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import uniqid from 'uniqid';
-import BtnAddList from './BtnAddList';
-import Lists from './Lists';
+import Main from './Main';
+import Modal from './Modal';
+import { Routes, Route, useLocation } from 'react-router-dom';
 
 const initNotes = [
   {id: uniqid(), listTitle: 'ToDo', cards: [
@@ -15,25 +16,19 @@ const initNotes = [
 
 function App() {
   const [notes, setNotes] = useState(initNotes);
-  const [listTitle, setListTitle] = useState('');
+  const location = useLocation();
+  const background = location.state && location.state.background;
 
   return (
-    <div className='container'>
-      <div className='wrapper'>
-        <Lists 
-          notes={notes}
-          setNotes={setNotes}
-          listTitle={listTitle}
-          setListTitle={setListTitle}
-        />
-        <BtnAddList 
-          notes={notes} 
-          setNotes={setNotes}
-          listTitle={listTitle}
-          setListTitle={setListTitle}
-        />
-      </div>
-    </div>
+    <>
+      <Routes location={background || location}>
+        <Route path='/' element={<Main notes={notes} setNotes={setNotes} />} />
+        <Route path='/card/:id' element={<Modal />} />
+      </Routes>
+      {background && <Routes>
+        <Route path="/card/:id" element={<Modal notes={notes} setNotes={setNotes} />} />
+      </Routes>}
+    </>
   );
 }
 

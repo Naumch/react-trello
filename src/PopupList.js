@@ -16,7 +16,7 @@ function PopupList({ workingWithList, setWorkingWithList, note, notes, setNotes 
     }))
     setReadyToMoveCards(false);
   }
-  console.log(notes);
+
   const items = notes.map(elem => {
     if (note.id === elem.id) {
       return (

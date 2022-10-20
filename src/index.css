@@ -26,6 +26,11 @@ button {
   color: #fff;
 }
 
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
 .container {
   max-width: 1200px;
   margin: 20px auto;
@@ -315,4 +320,21 @@ button {
   margin-left: 20px;
   margin-top: 6px;
   font-weight: 600;
+}
+
+.modalDiv {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  background-color: rgba(91, 112, 131, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal {
+  width: 350px;
+  height: 200px;
+  background-color: white;
+  border-radius: 5px;
 }
