@@ -12,7 +12,7 @@ function List({ note, notes, setNotes, listTitle, setListTitle }) {
   function addCard(cardName) {
     setNotes(notes.map(elem => {
       if (note.id === elem.id) {
-        let obj = {id: uniqid(), cardName: cardName};
+        let obj = {id: uniqid(), cardName: cardName, descr: ''};
         return {...elem, cards: [...elem.cards, obj]};
       } else {
         return elem;

@@ -322,19 +322,79 @@ a {
   font-weight: 600;
 }
 
-.modalDiv {
+.modal-back {
   width: 100vw;
   height: 100vh;
   position: absolute;
   top: 0;
-  background-color: rgba(91, 112, 131, 0.4);
+  background-color: rgba(67, 106, 139, 0.8);
+  display: flex;
+  justify-content: center;
+  padding-top: 100px;
+}
+
+.modal {
+  width: 700px;
+  height: 400px;
+  background-color: #f4f5f7;
+  border-radius: 4px;
+  padding: 20px;
+  padding-left: 40px;
+  position: relative;
+}
+
+.modal__top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal__title {
+  margin-bottom: 20px;
+}
+
+.modal__title-descr {
+  font-size: 14px;
+  line-height: 26px;
+}
+
+.modal__cancel {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: .2s;
 }
-.modal {
-  width: 350px;
-  height: 200px;
-  background-color: white;
-  border-radius: 5px;
+
+.modal__cancel:hover {
+  background-color: #e3e4e9;
 }
+
+.modal__cancel-btn {
+  color: #7e828c;
+  font-size: 16px;
+}
+
+.modal__textarea {
+  border: none;
+  margin-top: 12px;
+  width: 80%;
+  padding: 8px;
+  border-radius: 4px;
+  background-color: #eaecf0;
+  cursor: pointer;
+  transition: .3s;
+  margin-bottom: 4px;
+  height: 100px;
+}
+
+.modal__textarea:hover {
+  background-color: #e3e4e9;
+}
+
+.modal__textarea:focus {
+  background-color: #fff;
+  border: 1px solid #0079be;
+}
+

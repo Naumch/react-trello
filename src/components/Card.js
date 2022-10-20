@@ -15,11 +15,11 @@ function Card({ card, note, notes, setNotes }) {
   }
 
   function editCard(noteId, cardId, name) {
-    let result = {...note, cards: [...note.cards.map(res => {
-      if (res.id === cardId) {
-        return {...res, cardName: name};
+    let result = {...note, cards: [...note.cards.map(elem => {
+      if (elem.id === cardId) {
+        return {...elem, cardName: name};
       } else {
-        return res;
+        return elem;
       }
     })]}
 
@@ -48,7 +48,7 @@ function Card({ card, note, notes, setNotes }) {
         <button onClick={() => editCard(note.id, card.id, cardName)} className='button'>Сохранить</button>
         <div className='wrapper__button-black'> 
           <button className='button-black' onClick={() => setReadyToEditCard(false)}>
-            <Link to={{pathname: `/card/${card.id}`}} state={{ background: location }}>
+            <Link to={{pathname: `/card/${note.id}/${card.id}`}} state={{ background: location }}>
               <span className='button-black__icon'>&#10004;</span>
               Открыть карточку
             </Link>
@@ -79,7 +79,7 @@ function Card({ card, note, notes, setNotes }) {
         onMouseLeave={() => setOpacityBtn(0)}
       >       
         <Link 
-          to={{pathname: `/card/${card.id}`}} 
+          to={{pathname: `/card/${note.id}/${card.id}`}} 
           state={{ background: location }} 
           style={{flexGrow: 1}}
         >
