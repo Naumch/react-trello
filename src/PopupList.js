@@ -4,23 +4,45 @@ function PopupList({ workingWithList, setWorkingWithList, note, notes, setNotes 
   const [readyToMoveCards, setReadyToMoveCards] = useState(false);
 
   function moveCards(currentNoteId, newNoteId) {
+    const copyCard = notes.filter(elem => elem.id === currentNoteId)[0].cards;
 
+    setNotes(notes.map(elem => elem.id === currentNoteId ? {...elem, cards: []} : elem));
+    setNotes(prevState => prevState.map(elem => {
+      if (newNoteId === elem.id) {
+        return {...elem, cards: [...elem.cards, ...copyCard]}
+      } else {
+        return elem;
+      }
+    }))
+    setReadyToMoveCards(false);
   }
-
+  console.log(notes);
   const items = notes.map(elem => {
     if (note.id === elem.id) {
       return (
-        <li>{elem.listTitle} (текущий)</li>
+        <li
+          key={elem.id}
+          className='popup__menu-item'
+        >
+          {elem.listTitle} (текущий)
+        </li>
       )
     } else {
       return (
-        <li>{elem.listTitle}</li>
+        <li
+          key={elem.id}
+          className='popup__menu-item'
+          onClick={() => moveCards(note.id, elem.id)}
+        >
+          {elem.listTitle}
+        </li>
       )
     }
   })
 
   return (
-    workingWithList 
+    <>
+      {workingWithList 
       ? <div className='popup popup_list'>
           <div className='popup__top'>
             <p className='popup__top-text'>Действия со списком</p>
@@ -32,11 +54,14 @@ function PopupList({ workingWithList, setWorkingWithList, note, notes, setNotes 
             </button>
           </div> 
           <ul className='popup__menu'>
-            <li onClick={() => moveCards()} className='popup__menu-item'>
+            <li 
+              onClick={() => {
+                setWorkingWithList(false);
+                setReadyToMoveCards(true);
+              }} 
+              className='popup__menu-item'
+            >
               Переместить все карточки списка...
-              <ul>
-                {items}
-              </ul>
             </li>
             <li
               onClick={() => {
@@ -56,6 +81,34 @@ function PopupList({ workingWithList, setWorkingWithList, note, notes, setNotes 
           </ul>
         </div>
       : <></>  
+      }
+      {readyToMoveCards
+        ? <div className="popup popup_list">
+            <div className="popup__top">
+              <button 
+                onClick={() => {
+                  setReadyToMoveCards(false);
+                  setWorkingWithList(true);
+                }}
+                className='popup__top-btn popup__top-btn_back'
+              >
+                &lsaquo;
+              </button>
+              <p className='popup__top-text'>Переместить все карточки в список</p>
+              <button 
+                onClick={() => setReadyToMoveCards(false)}
+                className='popup__top-btn'
+              >
+                &#10006;
+              </button>
+            </div>
+            <ul className="popup__menu">
+              {items}
+            </ul>
+          </div>
+        : <></>
+      }
+    </>
   )
 }
 

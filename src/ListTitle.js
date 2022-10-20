@@ -5,13 +5,7 @@ function ListTitle({ note, notes, setNotes, listTitle, setListTitle, setWorkingW
 
   function editTitle(e) {
     if (e.keyCode === 13) {
-      setNotes(notes.map(elem => {
-        if (note.id === elem.id) {
-          return {...elem, listTitle: listTitle};
-        } else {
-          return elem;
-        }
-      }))
+      setNotes(notes.map(elem => note.id === elem.id ? {...elem, listTitle: listTitle} : elem))
       setReadyToEditList(false);
       setListTitle('');
     }

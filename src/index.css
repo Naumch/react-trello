@@ -288,6 +288,11 @@ button {
   color: #7f8083;
 }
 
+.popup__top-btn_back {
+  line-height: 0;
+  font-size: 25px;
+}
+
 .popup__menu {
   list-style: none;
   margin-top: 10px;
