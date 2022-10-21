@@ -84,6 +84,7 @@ function Card({ card, note, notes, setNotes }) {
           style={{flexGrow: 1}}
         >
           {card.cardName}
+          {card.descr.length !== 0 ? <div style={{marginTop: "2px"}}>&#9776;</div> : <></>}
         </Link>
         <button 
           className='card-edit__btn'

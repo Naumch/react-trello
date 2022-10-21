@@ -10,14 +10,16 @@ function List({ note, notes, setNotes, listTitle, setListTitle }) {
   const [workingWithList, setWorkingWithList] = useState(false);
 
   function addCard(cardName) {
-    setNotes(notes.map(elem => {
-      if (note.id === elem.id) {
-        let obj = {id: uniqid(), cardName: cardName, descr: ''};
-        return {...elem, cards: [...elem.cards, obj]};
-      } else {
-        return elem;
-      }
-    }))
+    if (cardName.length !== 0) {
+      setNotes(notes.map(elem => {
+        if (note.id === elem.id) {
+          let obj = {id: uniqid(), cardName: cardName, descr: ''};
+          return {...elem, cards: [...elem.cards, obj]};
+        } else {
+          return elem;
+        }
+      }))
+    }
   }
 
   function checkKeydownEnter(e, cardName) {

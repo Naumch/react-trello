@@ -9,6 +9,7 @@ function Modal({ notes, setNotes }) {
   const currentList = notes.filter(elem => elem.id === idList)[0];
   const currentCard = currentList.cards.filter(elem => elem.id === idCard)[0];
   const [value, setValue] = useState(currentCard.descr);
+  const [readyToEditDescr, setReadyToEditDescr] = useState(true);
 
   function editDescrCard(noteId, cardId, descr) {
     let result = {...currentList, cards: [...currentList.cards.map(elem => {
@@ -20,9 +21,8 @@ function Modal({ notes, setNotes }) {
     })]}
 
     setNotes(notes.map(elem => elem.id === noteId ? result : elem));
+    setReadyToEditDescr(true);
   }
-
-  console.log(notes);
 
   return (
     <div className="modal-back">
@@ -42,16 +42,23 @@ function Modal({ notes, setNotes }) {
         </div>
         <div className='modal__description'>
           <h4 style={{fontWeight: '500'}}>Описание</h4>
-          <textarea 
-            placeholder='Добавить более подробное описание...'
-            className='modal__textarea'
-            value={value}
-            onChange={e => setValue(e.target.value)}
-          >
-          </textarea>
-          <div>
-            <button className='button' onClick={() => editDescrCard(currentList.id, currentCard.id, value)}>Сохранить</button>
-          </div>  
+          {readyToEditDescr && currentCard.descr.length !== 0
+            ? <p onClick={() => setReadyToEditDescr(false)} style={{marginTop: "8px"}}>{currentCard.descr}</p>
+            : <>
+                <textarea 
+                  placeholder='Добавить более подробное описание...'
+                  className='modal__textarea'
+                  value={value}
+                  onChange={e => setValue(e.target.value)}
+                ></textarea>
+                <button 
+                  className='button' 
+                  onClick={() => editDescrCard(currentList.id, currentCard.id, value)}
+                >
+                  Сохранить
+                </button> 
+              </>
+          } 
         </div>
       </div>
     </div>

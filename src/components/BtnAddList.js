@@ -5,12 +5,13 @@ function BtnAddList({ notes, setNotes, listTitle, setListTitle }) {
   const [readyToAddList, setReadyToAddList] = useState(false);
 
   function saveTitle(e) {
-    if (e.keyCode === 13) {
+    if (e.keyCode === 13 && listTitle.length !== 0) {
       setNotes([...notes, {id: uniqid(), listTitle: listTitle, cards: []}]);
       setReadyToAddList(false);
       setListTitle('');
     }
   }
+
 
   return (
     readyToAddList
@@ -25,9 +26,13 @@ function BtnAddList({ notes, setNotes, listTitle, setListTitle }) {
           <button 
             className='button'
             onClick={() => {
-              setNotes([...notes, {id: uniqid(), listTitle: listTitle, cards: []}]);
-              setReadyToAddList(false);
-              setListTitle('');
+              if (listTitle.length === 0) {
+                return
+              } else {
+                setNotes([...notes, {id: uniqid(), listTitle: listTitle, cards: []}]);
+                setReadyToAddList(false);
+                setListTitle('');
+              }
             }}
           >
             Добавить список
