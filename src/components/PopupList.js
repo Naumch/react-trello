@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import MyContext from "../MyContext";
+import { useOutsideClick } from '../hooks/outsideClick.hook';
 
 function PopupList({ workingWithList, setWorkingWithList, note }) {
   const { notes, setNotes } = useContext(MyContext);
@@ -42,10 +43,17 @@ function PopupList({ workingWithList, setWorkingWithList, note }) {
     }
   })
 
+  function handleClickOutside() {
+    setWorkingWithList(false);
+    setReadyToMoveCards(false);
+  };
+
+  const ref = useOutsideClick(handleClickOutside);
+
   return (
     <>
       {workingWithList 
-      ? <div className='popup popup_list'>
+      ? <div ref={ref} className='popup popup_list'>
           <div className='popup__top'>
             <p className='popup__top-text'>Действия со списком</p>
             <button 
@@ -85,7 +93,7 @@ function PopupList({ workingWithList, setWorkingWithList, note }) {
       : <></>  
       }
       {readyToMoveCards
-        ? <div className="popup popup_list">
+        ? <div ref={ref} className="popup popup_list">
             <div className="popup__top">
               <button 
                 onClick={() => {

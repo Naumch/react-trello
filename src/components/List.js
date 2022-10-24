@@ -4,6 +4,7 @@ import ListTitle from './ListTitle';
 import uniqid from 'uniqid';
 import PopupList from './PopupList';
 import MyContext from '../MyContext';
+import { useOutsideClick } from '../hooks/outsideClick.hook';
 
 function List({ note, listTitle, setListTitle }) {
   const { notes, setNotes } = useContext(MyContext);
@@ -12,10 +13,10 @@ function List({ note, listTitle, setListTitle }) {
   const [workingWithList, setWorkingWithList] = useState(false);
 
   function addCard(cardName) {
-    if (cardName.length !== 0) {
+    if (cardName.trim().length !== 0) {
       setNotes(notes.map(elem => {
         if (note.id === elem.id) {
-          let obj = {id: uniqid(), cardName: cardName, descr: ''};
+          let obj = {id: uniqid(), cardName: cardName.trim(), descr: ''};
           return {...elem, cards: [...elem.cards, obj]};
         } else {
           return elem;
@@ -31,6 +32,13 @@ function List({ note, listTitle, setListTitle }) {
     }
   }
 
+  function handleClickOutside() {
+    setReadyToAddCard(false);
+    setCardName('');
+  };
+
+  const ref = useOutsideClick(handleClickOutside);
+
   const result = note.cards.map(card => {
     return (
       <Card 
@@ -40,6 +48,12 @@ function List({ note, listTitle, setListTitle }) {
       />
     )
   })
+
+  function handleChange(e) {
+    if (!(e.nativeEvent.data === null)) {
+      setCardName(e.target.value);
+    }
+  }
 
   return (
     <div className='list'>
@@ -51,12 +65,12 @@ function List({ note, listTitle, setListTitle }) {
       />
       {result}
       {readyToAddCard
-        ? <div>
+        ? <div ref={ref}>
             <textarea 
               placeholder='Ввести заголовок для этой карточки'
               className='textarea'
               value={cardName}
-              onChange={e => setCardName(e.target.value)}
+              onChange={e => handleChange(e)}
               onKeyDown={e => checkKeydownEnter(e, cardName)}
             />
             <button 

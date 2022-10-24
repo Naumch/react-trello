@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import MyContext from '../MyContext';
+import { useOutsideClick } from '../hooks/outsideClick.hook';
 
 function Modal() {
   const navigate = useNavigate();
@@ -27,9 +28,15 @@ function Modal() {
     setReadyToEditDescr(true);
   }
 
+  function handleClickOutside() {
+    navigate(-1);
+  };
+
+  const ref = useOutsideClick(handleClickOutside);
+
   return (
     <div className="modal-back">
-      <div className="modal">
+      <div ref={ref} className="modal">
         <div className='modal__top'>
           <div className='modal__title'>
             <h3 style={{fontWeight: '500'}}>{currentCard.cardName}</h3>

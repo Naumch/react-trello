@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import uniqid from 'uniqid';
 import MyContext from '../MyContext';
+import { useOutsideClick } from '../hooks/outsideClick.hook';
 
 function BtnAddList({ listTitle, setListTitle }) {
   const { notes, setNotes } = useContext(MyContext);
@@ -14,9 +15,16 @@ function BtnAddList({ listTitle, setListTitle }) {
     }
   }
 
+  function handleClickOutside() {
+    setReadyToAddList(false);
+    setListTitle('');
+  };
+
+  const ref = useOutsideClick(handleClickOutside);
+
   return (
     readyToAddList
-      ? <div className='list-add'>
+      ? <div ref={ref} className='list-add'>
           <input 
             placeholder='Ввести заголовок списка'
             className='list-add__input' 

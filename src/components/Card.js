@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import PopupCard from './PopupCard';
 import { Link, useLocation } from 'react-router-dom';
 import MyContext from '../MyContext';
+import { useOutsideClick } from "../hooks/outsideClick.hook";
 
 function Card({ card, note }) {
   const { notes, setNotes } = useContext(MyContext);
@@ -17,30 +18,36 @@ function Card({ card, note }) {
   }
 
   function editCard(noteId, cardId, name) {
-    let result = {...note, cards: [...note.cards.map(elem => {
-      if (elem.id === cardId) {
-        return {...elem, cardName: name};
-      } else {
-        return elem;
-      }
-    })]}
-
-    setNotes(notes.map(elem => elem.id === noteId ? result : elem));
-    setReadyToEditCard(false);
-    setCardName('');
-  }
-
-  function checkKeydownEnter(e, noteId, cardId, name) {
-    if (e.keyCode === 13) {
-      editCard(noteId, cardId, name);
+    if (name.trim().length !== 0) {
+      let result = {...note, cards: [...note.cards.map(elem => {
+        if (elem.id === cardId) {
+          return {...elem, cardName: name.trim()};
+        } else {
+          return elem;
+        }
+      })]}
+  
+      setNotes(notes.map(elem => elem.id === noteId ? result : elem));
       setReadyToEditCard(false);
       setCardName('');
     }
   }
 
+  function checkKeydownEnter(e, noteId, cardId, name) {
+    if (e.keyCode === 13) {
+      editCard(noteId, cardId, name);
+    }
+  }
+
+  function handleClickOutside() {
+    setReadyToEditCard(false);
+  };
+
+  const ref = useOutsideClick(handleClickOutside);
+
   return (
     readyToEditCard 
-    ? <div className='box-textarea'>
+    ? <div ref={ref} className='box-textarea'>
         <textarea 
           value={cardName} 
           className='textarea'
