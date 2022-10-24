@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import PopupCard from './PopupCard';
 import { Link, useLocation } from 'react-router-dom';
+import MyContext from '../MyContext';
 
-function Card({ card, note, notes, setNotes }) {
+function Card({ card, note }) {
+  const { notes, setNotes } = useContext(MyContext);
   const [opacityBtn, setOpacityBtn] = useState(0);
   const [readyToEditCard, setReadyToEditCard] = useState(false);
   const [cardName, setCardName] = useState('');
@@ -67,8 +69,6 @@ function Card({ card, note, notes, setNotes }) {
           setReadyToMoveCard={setReadyToMoveCard}
           card={card}
           note={note}
-          notes={notes}
-          setNotes={setNotes}
           deleteCard={deleteCard}
           setReadyToEditCard={setReadyToEditCard}
         />

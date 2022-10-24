@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import MyContext from "../MyContext";
 
-function ListTitle({ note, notes, setNotes, listTitle, setListTitle, setWorkingWithList }) {
+function ListTitle({ note, listTitle, setListTitle, setWorkingWithList }) {
+  const { notes, setNotes } = useContext(MyContext);
   const [readyToEditList, setReadyToEditList] = useState(false);
 
   function editTitle(e) {

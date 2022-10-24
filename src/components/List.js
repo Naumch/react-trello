@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Card from './Card';
 import ListTitle from './ListTitle';
 import uniqid from 'uniqid';
 import PopupList from './PopupList';
+import MyContext from '../MyContext';
 
-function List({ note, notes, setNotes, listTitle, setListTitle }) {
+function List({ note, listTitle, setListTitle }) {
+  const { notes, setNotes } = useContext(MyContext);
   const [readyToAddCard, setReadyToAddCard] = useState(false);
   const [cardName, setCardName] = useState('');
   const [workingWithList, setWorkingWithList] = useState(false);
@@ -35,8 +37,6 @@ function List({ note, notes, setNotes, listTitle, setListTitle }) {
         key={card.id} 
         card={card}
         note={note}
-        notes={notes}
-        setNotes={setNotes}
       />
     )
   })
@@ -45,8 +45,6 @@ function List({ note, notes, setNotes, listTitle, setListTitle }) {
     <div className='list'>
       <ListTitle 
         note={note}
-        notes={notes}
-        setNotes={setNotes}
         listTitle={listTitle}
         setListTitle={setListTitle}
         setWorkingWithList={setWorkingWithList}
@@ -92,8 +90,6 @@ function List({ note, notes, setNotes, listTitle, setListTitle }) {
         workingWithList={workingWithList}
         setWorkingWithList={setWorkingWithList}
         note={note}
-        notes={notes}
-        setNotes={setNotes}
       />
     </div>
   )

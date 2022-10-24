@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import uniqid from 'uniqid';
+import MyContext from '../MyContext';
 
-function BtnAddList({ notes, setNotes, listTitle, setListTitle }) {
+function BtnAddList({ listTitle, setListTitle }) {
+  const { notes, setNotes } = useContext(MyContext);
   const [readyToAddList, setReadyToAddList] = useState(false);
 
   function saveTitle(e) {
@@ -11,7 +13,6 @@ function BtnAddList({ notes, setNotes, listTitle, setListTitle }) {
       setListTitle('');
     }
   }
-
 
   return (
     readyToAddList

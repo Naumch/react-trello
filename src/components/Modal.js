@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import MyContext from '../MyContext';
 
-function Modal({ notes, setNotes }) {
+function Modal() {
   const navigate = useNavigate();
   const idList = useParams().idList;
   const idCard = useParams().idCard;
+
+  const { notes, setNotes } = useContext(MyContext);
 
   const currentList = notes.filter(elem => elem.id === idList)[0];
   const currentCard = currentList.cards.filter(elem => elem.id === idCard)[0];

@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import MyContext from "../MyContext";
 
-function PopupList({ workingWithList, setWorkingWithList, note, notes, setNotes }) {
+function PopupList({ workingWithList, setWorkingWithList, note }) {
+  const { notes, setNotes } = useContext(MyContext);
   const [readyToMoveCards, setReadyToMoveCards] = useState(false);
 
   function moveCards(currentNoteId, newNoteId) {

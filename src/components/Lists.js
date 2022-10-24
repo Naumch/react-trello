@@ -1,18 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import List from './List';
+import MyContext from '../MyContext';
 
-function Lists({ notes, setNotes, listTitle, setListTitle }) {
+function Lists({ listTitle, setListTitle }) {
+  const { notes } = useContext(MyContext);
 
   const result = notes.map(note => {
     return (
-        <List 
-          key={note.id}
-          note={note}
-          notes={notes}
-          setNotes={setNotes}
-          listTitle={listTitle}
-          setListTitle={setListTitle}
-        />
+      <List 
+        key={note.id}
+        note={note}
+        listTitle={listTitle}
+        setListTitle={setListTitle}
+      />
     )
   })
 
