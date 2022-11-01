@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import MyContext from '../MyContext';
 import { useOutsideClick } from '../hooks/outsideClick.hook';
@@ -15,7 +15,7 @@ function Modal() {
   const [value, setValue] = useState(currentCard.descr);
   const [readyToEditDescr, setReadyToEditDescr] = useState(true);
 
-  function editDescrCard(noteId, cardId, descr) {
+  const editDescrCard = (noteId, cardId, descr) => {
     let result = {...currentList, cards: [...currentList.cards.map(elem => {
       if (elem.id === cardId) {
         return {...elem, descr: descr};
@@ -28,7 +28,7 @@ function Modal() {
     setReadyToEditDescr(true);
   }
 
-  function handleClickOutside() {
+  const handleClickOutside = () => {
     navigate(-1);
   };
 

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import { useState, useContext } from "react";
 import MyContext from "../MyContext";
 import { useOutsideClick } from '../hooks/outsideClick.hook';
 
@@ -6,7 +6,7 @@ function PopupList({ workingWithList, setWorkingWithList, note }) {
   const { notes, setNotes } = useContext(MyContext);
   const [readyToMoveCards, setReadyToMoveCards] = useState(false);
 
-  function moveCards(currentNoteId, newNoteId) {
+  const moveCards = (currentNoteId, newNoteId) => {
     const copyCard = notes.filter(elem => elem.id === currentNoteId)[0].cards;
 
     setNotes(notes.map(elem => elem.id === currentNoteId ? {...elem, cards: []} : elem));
@@ -43,7 +43,7 @@ function PopupList({ workingWithList, setWorkingWithList, note }) {
     }
   })
 
-  function handleClickOutside() {
+  const handleClickOutside = () => {
     setWorkingWithList(false);
     setReadyToMoveCards(false);
   };

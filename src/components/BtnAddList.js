@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 import uniqid from 'uniqid';
 import MyContext from '../MyContext';
 import { useOutsideClick } from '../hooks/outsideClick.hook';
@@ -7,7 +7,7 @@ function BtnAddList({ listTitle, setListTitle }) {
   const { notes, setNotes } = useContext(MyContext);
   const [readyToAddList, setReadyToAddList] = useState(false);
 
-  function saveTitle(e) {
+  const saveTitle = (e) => {
     if (e.keyCode === 13 && listTitle.length !== 0) {
       setNotes([...notes, {id: uniqid(), listTitle: listTitle, cards: []}]);
       setReadyToAddList(false);
@@ -15,7 +15,7 @@ function BtnAddList({ listTitle, setListTitle }) {
     }
   }
 
-  function handleClickOutside() {
+  const handleClickOutside = () => {
     setReadyToAddList(false);
     setListTitle('');
   };

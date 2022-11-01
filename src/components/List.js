@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 import Card from './Card';
 import ListTitle from './ListTitle';
 import uniqid from 'uniqid';
@@ -12,7 +12,7 @@ function List({ note, listTitle, setListTitle }) {
   const [cardName, setCardName] = useState('');
   const [workingWithList, setWorkingWithList] = useState(false);
 
-  function addCard(cardName) {
+  const addCard = (cardName) => {
     if (cardName.trim().length !== 0) {
       setNotes(notes.map(elem => {
         if (note.id === elem.id) {
@@ -25,14 +25,14 @@ function List({ note, listTitle, setListTitle }) {
     }
   }
 
-  function checkKeydownEnter(e, cardName) {
+  const checkKeydownEnter = (e, cardName) => {
     if (e.keyCode === 13) {
       addCard(cardName);
       setCardName('');
     }
   }
 
-  function handleClickOutside() {
+  const handleClickOutside = () => {
     setReadyToAddCard(false);
     setCardName('');
   };
@@ -49,8 +49,8 @@ function List({ note, listTitle, setListTitle }) {
     )
   })
 
-  function handleChange(e) {
-    if (!(e.nativeEvent.data === null)) {
+  const handleChange = (e) => {
+    if (!(e.nativeEvent.inputType === 'insertLineBreak')) {
       setCardName(e.target.value);
     }
   }

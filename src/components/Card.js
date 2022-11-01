@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 import PopupCard from './PopupCard';
 import { Link, useLocation } from 'react-router-dom';
 import MyContext from '../MyContext';
@@ -13,11 +13,11 @@ function Card({ card, note }) {
 
   const location = useLocation();
 
-  function deleteCard(noteId, cardId) {
+  const deleteCard = (noteId, cardId) => {
     setNotes(notes.map(elem => elem.id === noteId ? {...note, cards: [...note.cards.filter(res => res.id !== cardId)]} : elem));
   }
 
-  function editCard(noteId, cardId, name) {
+  const editCard = (noteId, cardId, name) => {
     if (name.trim().length !== 0) {
       let result = {...note, cards: [...note.cards.map(elem => {
         if (elem.id === cardId) {
@@ -33,13 +33,13 @@ function Card({ card, note }) {
     }
   }
 
-  function checkKeydownEnter(e, noteId, cardId, name) {
+  const checkKeydownEnter = (e, noteId, cardId, name) => {
     if (e.keyCode === 13) {
       editCard(noteId, cardId, name);
     }
   }
 
-  function handleClickOutside() {
+  const handleClickOutside = () => {
     setReadyToEditCard(false);
   };
 

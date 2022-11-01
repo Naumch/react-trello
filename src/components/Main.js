@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Lists from "./Lists";
 import BtnAddList from "./BtnAddList";
 
@@ -16,7 +16,7 @@ function Main() {
           listTitle={listTitle}
           setListTitle={setListTitle}
         />
-    </div>
+      </div>
     </div>
   )
 }

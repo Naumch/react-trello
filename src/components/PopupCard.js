@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import MyContext from "../MyContext";
 
 function PopupCard ({ readyToMoveCard, setReadyToMoveCard, card, note, deleteCard, setReadyToEditCard }) {
   const { notes, setNotes } = useContext(MyContext);
 
-  function moveCard(cardId, currentNoteId, newNoteId) {
+  const moveCard = (cardId, currentNoteId, newNoteId) => {
     const copyList = notes.filter(elem => elem.id === currentNoteId);
     const copyCard = copyList[0].cards.filter(elem => elem.id === cardId)[0];
 

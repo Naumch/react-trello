@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import Main from './Main';
 import Modal from './Modal';
 import { Routes, Route, useLocation } from 'react-router-dom';

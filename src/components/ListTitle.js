@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import { useState, useContext } from "react";
 import MyContext from "../MyContext";
 import { useOutsideClick } from '../hooks/outsideClick.hook';
 
@@ -6,19 +6,19 @@ function ListTitle({ note, listTitle, setListTitle, setWorkingWithList }) {
   const { notes, setNotes } = useContext(MyContext);
   const [readyToEditList, setReadyToEditList] = useState(false);
 
-  function editTitle() {
+  const editTitle = () => {
     setNotes(notes.map(elem => note.id === elem.id ? {...elem, listTitle: listTitle} : elem))
     setReadyToEditList(false);
     setListTitle('');
   }
 
-  function checkKeydownEnter(e) {
+  const checkKeydownEnter = (e) => {
     if (e.keyCode === 13) {
       editTitle();
     }
   }
 
-  function handleClickOutside() {
+  const handleClickOutside = () => {
     setReadyToEditList(false);
     setListTitle('');
   };
