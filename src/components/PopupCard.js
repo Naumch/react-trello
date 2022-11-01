@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import MyContext from "../MyContext";
 
-function PopupCard ({ readyToMoveCard, setReadyToMoveCard, card, note, deleteCard, setReadyToEditCard }) {
+function PopupCard ({ setReadyToMoveCard, card, note, deleteCard, setReadyToEditCard }) {
   const { notes, setNotes } = useContext(MyContext);
 
   const moveCard = (cardId, currentNoteId, newNoteId) => {
@@ -44,23 +44,21 @@ function PopupCard ({ readyToMoveCard, setReadyToMoveCard, card, note, deleteCar
   })
 
   return (
-    readyToMoveCard
-      ? <div className="popup popup_card">
-          <div className="popup__top">
-            <p className="popup__top-text">Перемещение карточки</p>
-            <button
-              onClick={() => setReadyToMoveCard(false)}
-              className='popup__top-btn'
-            >
-              &#10006;
-            </button>
-          </div>
-          <p className="popup__menu-title">Выберете список</p>
-            <ul className="popup__menu">
-              {items}
-            </ul>
-        </div>
-      : <></>
+    <div className="popup popup_card">
+      <div className="popup__top">
+        <p className="popup__top-text">Перемещение карточки</p>
+        <button
+          onClick={() => setReadyToMoveCard(false)}
+          className='popup__top-btn'
+        >
+          &#10006;
+        </button>
+      </div>
+      <p className="popup__menu-title">Выберете список</p>
+      <ul className="popup__menu">
+        {items}
+      </ul>
+    </div>
   )
 }
 

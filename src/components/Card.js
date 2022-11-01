@@ -1,32 +1,20 @@
 import { useState, useContext } from 'react';
-import PopupCard from './PopupCard';
 import { Link, useLocation } from 'react-router-dom';
 import MyContext from '../MyContext';
 import { useOutsideClick } from "../hooks/outsideClick.hook";
+import { BlackButtons } from './BlackButtons';
 
 function Card({ card, note }) {
   const { notes, setNotes } = useContext(MyContext);
   const [opacityBtn, setOpacityBtn] = useState(0);
   const [readyToEditCard, setReadyToEditCard] = useState(false);
   const [cardName, setCardName] = useState('');
-  const [readyToMoveCard, setReadyToMoveCard] = useState(false);
 
   const location = useLocation();
 
-  const deleteCard = (noteId, cardId) => {
-    setNotes(notes.map(elem => elem.id === noteId ? {...note, cards: [...note.cards.filter(res => res.id !== cardId)]} : elem));
-  }
-
   const editCard = (noteId, cardId, name) => {
     if (name.trim().length !== 0) {
-      let result = {...note, cards: [...note.cards.map(elem => {
-        if (elem.id === cardId) {
-          return {...elem, cardName: name.trim()};
-        } else {
-          return elem;
-        }
-      })]}
-  
+      let result = {...note, cards: [...note.cards.map(elem => elem.id === cardId ? {...elem, cardName: name.trim()} : elem)]}  
       setNotes(notes.map(elem => elem.id === noteId ? result : elem));
       setReadyToEditCard(false);
       setCardName('');
@@ -39,11 +27,7 @@ function Card({ card, note }) {
     }
   }
 
-  const handleClickOutside = () => {
-    setReadyToEditCard(false);
-  };
-
-  const ref = useOutsideClick(handleClickOutside);
+  const ref = useOutsideClick(() => setReadyToEditCard(false));
 
   return (
     readyToEditCard 
@@ -55,28 +39,10 @@ function Card({ card, note }) {
           onKeyDown={e => checkKeydownEnter(e, note.id, card.id, cardName)}
         />
         <button onClick={() => editCard(note.id, card.id, cardName)} className='button'>Сохранить</button>
-        <div className='wrapper__button-black'> 
-          <button className='button-black' onClick={() => setReadyToEditCard(false)}>
-            <Link to={{pathname: `/card/${note.id}/${card.id}`}} state={{ background: location }}>
-              <span className='button-black__icon'>&#10004;</span>
-              Открыть карточку
-            </Link>
-          </button>
-          <button onClick={() => setReadyToMoveCard(true)} className='button-black'>
-            <span className='button-black__icon'>&#8617;</span>
-            Переместить
-          </button>
-          <button onClick={() => deleteCard(note.id, card.id)} className='button-black'>
-            <span className='button-black__icon'>&#10008;</span>
-            Удалить
-          </button>
-        </div>
-        <PopupCard 
-          readyToMoveCard={readyToMoveCard}
-          setReadyToMoveCard={setReadyToMoveCard}
+        <BlackButtons 
           card={card}
           note={note}
-          deleteCard={deleteCard}
+          location={location}
           setReadyToEditCard={setReadyToEditCard}
         />
       </div>
@@ -91,7 +57,7 @@ function Card({ card, note }) {
           style={{flexGrow: 1}}
         >
           {card.cardName}
-          {card.descr.length !== 0 ? <div style={{marginTop: "2px"}}>&#9776;</div> : <></>}
+          {card.descr.length !== 0 && <div style={{marginTop: "2px"}}>&#9776;</div>}
         </Link>
         <button 
           className='card-edit__btn'
