@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 import MyContext from "../MyContext";
 import { useOutsideClick } from '../hooks/outsideClick.hook';
 import { PopupItem } from "./PopupItem";
+import PopupHeader from "./PopupHeader";
 
 function PopupList({ setWorkingWithList, note }) {
   const { notes, setNotes } = useContext(MyContext);
@@ -39,15 +40,10 @@ function PopupList({ setWorkingWithList, note }) {
   return (
     <>
       <div ref={ref} className='popup popup_list'>
-        <div className='popup__top'>
-          <p className='popup__top-text'>Действия со списком</p>
-          <button 
-            onClick={() => setWorkingWithList(false)}
-            className='popup__top-btn'
-          >
-            &#10006;
-          </button>
-        </div> 
+        <PopupHeader 
+          text="Действия со списком"
+          funcClose={() => setWorkingWithList(false)}
+        />
         <ul className='popup__menu'>
           <PopupItem 
             text="Переместить все карточки списка..."
@@ -65,21 +61,11 @@ function PopupList({ setWorkingWithList, note }) {
       </div>  
       {readyToMoveCards &&
         <div ref={ref} className="popup popup_list">
-          <div className="popup__top">
-            <button 
-              onClick={() => setReadyToMoveCards(false)}
-              className='popup__top-btn popup__top-btn_back'
-            >
-              &lsaquo;
-            </button>
-            <p className='popup__top-text'>Переместить все карточки в список</p>
-            <button 
-              onClick={() => setWorkingWithList(false)}
-              className='popup__top-btn'
-            >
-              &#10006;
-            </button>
-          </div>
+          <PopupHeader 
+            text="Переместить все карточки в список"
+            funcBack={() => setReadyToMoveCards(false)}
+            funcClose={() => setWorkingWithList(false)}
+          />
           <ul className="popup__menu">
             {items}
           </ul>

@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import MyContext from "../MyContext";
+import PopupHeader from "./PopupHeader";
 import { PopupItem } from "./PopupItem";
 
 function PopupCard ({ setReadyToMoveCard, card, note, deleteCard, setReadyToEditCard }) {
@@ -30,15 +31,10 @@ function PopupCard ({ setReadyToMoveCard, card, note, deleteCard, setReadyToEdit
 
   return (
     <div className="popup popup_card">
-      <div className="popup__top">
-        <p className="popup__top-text">Перемещение карточки</p>
-        <button
-          onClick={() => setReadyToMoveCard(false)}
-          className='popup__top-btn'
-        >
-          &#10006;
-        </button>
-      </div>
+      <PopupHeader 
+        text="Перемещение карточки"
+        funcClose={() => setReadyToMoveCard(false)}
+      />
       <p className="popup__menu-title">Выберете список</p>
       <ul className="popup__menu">
         {items}
