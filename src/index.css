@@ -384,11 +384,11 @@ a {
   padding: 8px;
   border-radius: 4px;
   background-color: #eaecf0;
-  cursor: pointer;
   transition: .3s;
   margin-bottom: 8px;
   height: 100px;
   display: block;
+  resize: none;
 }
 
 .modal__textarea:hover {
