@@ -1,8 +1,8 @@
 import { createContext } from "react";
 
 const MyContext = createContext({
-  names: null,
-  setNames: () => {}
+  notes: null,
+  setNotes: () => {}
 });
 
 export default MyContext;

@@ -1,8 +1,9 @@
 import { useState, useContext } from "react";
 import MyContext from "../MyContext";
 import { useOutsideClick } from '../hooks/outsideClick.hook';
+import { PopupItem } from "./PopupItem";
 
-function PopupList({ workingWithList, setWorkingWithList, note }) {
+function PopupList({ setWorkingWithList, note }) {
   const { notes, setNotes } = useContext(MyContext);
   const [readyToMoveCards, setReadyToMoveCards] = useState(false);
 
@@ -17,106 +18,72 @@ function PopupList({ workingWithList, setWorkingWithList, note }) {
         return elem;
       }
     }))
-    setReadyToMoveCards(false);
+    setWorkingWithList(false);
+  }
+
+  const deleteCards = () => {
+    setNotes(notes.map(elem => elem.id === note.id ? {...elem, cards: []} : elem));
+    setWorkingWithList(false);
   }
 
   const items = notes.map(elem => {
     if (note.id === elem.id) {
-      return (
-        <li
-          key={elem.id}
-          className='popup__menu-item'
-        >
-          {elem.listTitle} (текущий)
-        </li>
-      )
+      return <PopupItem key={elem.id} text={elem.listTitle + " (текущий)"}/>
     } else {
-      return (
-        <li
-          key={elem.id}
-          className='popup__menu-item'
-          onClick={() => moveCards(note.id, elem.id)}
-        >
-          {elem.listTitle}
-        </li>
-      )
+      return <PopupItem key={elem.id} func={() => moveCards(note.id, elem.id)} text={elem.listTitle}/>
     }
   })
 
-  const handleClickOutside = () => {
-    setWorkingWithList(false);
-    setReadyToMoveCards(false);
-  };
-
-  const ref = useOutsideClick(handleClickOutside);
+  const ref = useOutsideClick(() => setWorkingWithList(false));
 
   return (
     <>
-      {workingWithList 
-      ? <div ref={ref} className='popup popup_list'>
-          <div className='popup__top'>
-            <p className='popup__top-text'>Действия со списком</p>
+      <div ref={ref} className='popup popup_list'>
+        <div className='popup__top'>
+          <p className='popup__top-text'>Действия со списком</p>
+          <button 
+            onClick={() => setWorkingWithList(false)}
+            className='popup__top-btn'
+          >
+            &#10006;
+          </button>
+        </div> 
+        <ul className='popup__menu'>
+          <PopupItem 
+            text="Переместить все карточки списка..."
+            func={() => setReadyToMoveCards(true)} 
+          />
+          <PopupItem 
+            text="Удалить все карточки списка..."
+            func={deleteCards}
+          />
+          <PopupItem 
+            text="Удалить список..."
+            func={() => setNotes(notes.filter(elem => elem.id !== note.id))}
+          />
+        </ul>
+      </div>  
+      {readyToMoveCards &&
+        <div ref={ref} className="popup popup_list">
+          <div className="popup__top">
+            <button 
+              onClick={() => setReadyToMoveCards(false)}
+              className='popup__top-btn popup__top-btn_back'
+            >
+              &lsaquo;
+            </button>
+            <p className='popup__top-text'>Переместить все карточки в список</p>
             <button 
               onClick={() => setWorkingWithList(false)}
               className='popup__top-btn'
             >
               &#10006;
             </button>
-          </div> 
-          <ul className='popup__menu'>
-            <li 
-              onClick={() => {
-                setWorkingWithList(false);
-                setReadyToMoveCards(true);
-              }} 
-              className='popup__menu-item'
-            >
-              Переместить все карточки списка...
-            </li>
-            <li
-              onClick={() => {
-                setNotes(notes.map(elem => elem.id === note.id ? {...elem, cards: []} : elem));
-                setWorkingWithList(false);
-            }}
-              className='popup__menu-item'
-            >
-              Удалить все карточки списка...
-            </li>
-            <li 
-              onClick={() => setNotes(notes.filter(elem => elem.id !== note.id))} 
-              className='popup__menu-item'
-            >
-              Удалить список...
-            </li>
+          </div>
+          <ul className="popup__menu">
+            {items}
           </ul>
         </div>
-      : <></>  
-      }
-      {readyToMoveCards
-        ? <div ref={ref} className="popup popup_list">
-            <div className="popup__top">
-              <button 
-                onClick={() => {
-                  setReadyToMoveCards(false);
-                  setWorkingWithList(true);
-                }}
-                className='popup__top-btn popup__top-btn_back'
-              >
-                &lsaquo;
-              </button>
-              <p className='popup__top-text'>Переместить все карточки в список</p>
-              <button 
-                onClick={() => setReadyToMoveCards(false)}
-                className='popup__top-btn'
-              >
-                &#10006;
-              </button>
-            </div>
-            <ul className="popup__menu">
-              {items}
-            </ul>
-          </div>
-        : <></>
       }
     </>
   )

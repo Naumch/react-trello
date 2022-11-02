@@ -1,16 +1,14 @@
 import { useState, useContext } from 'react';
 import Card from './Card';
-import ListTitle from './ListTitle';
 import uniqid from 'uniqid';
-import PopupList from './PopupList';
 import MyContext from '../MyContext';
 import { useOutsideClick } from '../hooks/outsideClick.hook';
+import HeaderList from './HeaderList';
 
 function List({ note, listTitle, setListTitle }) {
   const { notes, setNotes } = useContext(MyContext);
   const [readyToAddCard, setReadyToAddCard] = useState(false);
   const [cardName, setCardName] = useState('');
-  const [workingWithList, setWorkingWithList] = useState(false);
 
   const addCard = (cardName) => {
     if (cardName.trim().length !== 0) {
@@ -39,7 +37,7 @@ function List({ note, listTitle, setListTitle }) {
 
   const ref = useOutsideClick(handleClickOutside);
 
-  const result = note.cards.map(card => {
+  const cards = note.cards.map(card => {
     return (
       <Card 
         key={card.id} 
@@ -57,13 +55,12 @@ function List({ note, listTitle, setListTitle }) {
 
   return (
     <div className='list'>
-      <ListTitle 
+      <HeaderList 
         note={note}
         listTitle={listTitle}
         setListTitle={setListTitle}
-        setWorkingWithList={setWorkingWithList}
       />
-      {result}
+      {cards}
       {readyToAddCard
         ? <div ref={ref}>
             <textarea 
@@ -100,11 +97,6 @@ function List({ note, listTitle, setListTitle }) {
             Добавить карточку
           </button>
       }
-      <PopupList 
-        workingWithList={workingWithList}
-        setWorkingWithList={setWorkingWithList}
-        note={note}
-      />
     </div>
   )
 }

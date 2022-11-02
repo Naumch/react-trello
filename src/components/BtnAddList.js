@@ -7,20 +7,25 @@ function BtnAddList({ listTitle, setListTitle }) {
   const { notes, setNotes } = useContext(MyContext);
   const [readyToAddList, setReadyToAddList] = useState(false);
 
-  const saveTitle = (e) => {
-    if (e.keyCode === 13 && listTitle.length !== 0) {
-      setNotes([...notes, {id: uniqid(), listTitle: listTitle, cards: []}]);
-      setReadyToAddList(false);
-      setListTitle('');
-    }
-  }
-
-  const handleClickOutside = () => {
+  const stopSaveTitle = () => {
     setReadyToAddList(false);
     setListTitle('');
   };
 
-  const ref = useOutsideClick(handleClickOutside);
+  const saveTitle = () => {
+    if (listTitle.length !== 0) {
+      setNotes([...notes, {id: uniqid(), listTitle: listTitle, cards: []}]);
+      stopSaveTitle();
+    }
+  };
+
+  const checkKeydownEnter = (e) => {
+    if (e.keyCode === 13) {
+      saveTitle();
+    }
+  };
+
+  const ref = useOutsideClick(stopSaveTitle);
 
   return (
     readyToAddList
@@ -30,28 +35,17 @@ function BtnAddList({ listTitle, setListTitle }) {
             className='list-add__input' 
             value={listTitle} 
             onChange={e => setListTitle(e.target.value)}
-            onKeyDown={e => saveTitle(e)}
+            onKeyDown={e => checkKeydownEnter(e)}
           />
           <button 
             className='button'
-            onClick={() => {
-              if (listTitle.length === 0) {
-                return
-              } else {
-                setNotes([...notes, {id: uniqid(), listTitle: listTitle, cards: []}]);
-                setReadyToAddList(false);
-                setListTitle('');
-              }
-            }}
+            onClick={saveTitle}
           >
             Добавить список
           </button>
           <button 
             className='button-cancel'
-            onClick={() => {
-              setReadyToAddList(false);
-              setListTitle('');
-            }}
+            onClick={stopSaveTitle}
           >
             &#10006;
           </button>

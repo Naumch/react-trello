@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import MyContext from "../MyContext";
+import { PopupItem } from "./PopupItem";
 
 function PopupCard ({ setReadyToMoveCard, card, note, deleteCard, setReadyToEditCard }) {
   const { notes, setNotes } = useContext(MyContext);
@@ -21,25 +22,9 @@ function PopupCard ({ setReadyToMoveCard, card, note, deleteCard, setReadyToEdit
 
   const items = notes.map(elem => {
     if (elem.id === note.id) {
-      return (
-        <li 
-          key={elem.id}
-          className="popup__menu-item"
-          
-        >
-          {elem.listTitle} (текущий)
-        </li>
-      )
+      return <PopupItem key={elem.id} text={elem.listTitle + " (текущий)"}/>
     } else {
-      return (
-        <li 
-          key={elem.id}
-          className="popup__menu-item"
-          onClick={() => moveCard(card.id, note.id, elem.id)}
-        >
-          {elem.listTitle}
-        </li>
-      )
+      return <PopupItem key={elem.id} func={() => moveCard(card.id, note.id, elem.id)} text={elem.listTitle}/>
     }
   })
 

@@ -7,11 +7,13 @@ import MyContext from '../MyContext';
 
 function App() {
   const [notes, setNotes] = useCrossTabState("notes", []);
+
   const value = useMemo(
     () => ({ notes, setNotes }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [notes]
   )
+
   const location = useLocation();
   const background = location.state && location.state.background;
 

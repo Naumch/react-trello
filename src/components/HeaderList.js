@@ -1,15 +1,21 @@
 import { useState, useContext } from "react";
 import MyContext from "../MyContext";
 import { useOutsideClick } from '../hooks/outsideClick.hook';
+import PopupList from "./PopupList";
 
-function ListTitle({ note, listTitle, setListTitle, setWorkingWithList }) {
+function HeaderList({ note, listTitle, setListTitle }) {
   const { notes, setNotes } = useContext(MyContext);
   const [readyToEditList, setReadyToEditList] = useState(false);
+  const [workingWithList, setWorkingWithList] = useState(false);
+
+  const stopEditTitle = () => {
+    setReadyToEditList(false);
+    setListTitle('');
+  };
 
   const editTitle = () => {
     setNotes(notes.map(elem => note.id === elem.id ? {...elem, listTitle: listTitle} : elem))
-    setReadyToEditList(false);
-    setListTitle('');
+    stopEditTitle();
   }
 
   const checkKeydownEnter = (e) => {
@@ -18,12 +24,7 @@ function ListTitle({ note, listTitle, setListTitle, setWorkingWithList }) {
     }
   }
 
-  const handleClickOutside = () => {
-    setReadyToEditList(false);
-    setListTitle('');
-  };
-
-  const ref = useOutsideClick(handleClickOutside);
+  const ref = useOutsideClick(stopEditTitle);
 
   return (
     <div className='list__title'>
@@ -48,8 +49,14 @@ function ListTitle({ note, listTitle, setListTitle, setWorkingWithList }) {
       <button onClick={() => setWorkingWithList(true)} className='list__title-btn'>
         &middot;&middot;&middot;
       </button>
+      {workingWithList &&
+        <PopupList 
+          setWorkingWithList={setWorkingWithList}
+          note={note}
+        />
+      }
     </div>
   )
 }
 
-export default ListTitle;
+export default HeaderList;
