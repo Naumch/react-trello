@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import MyContext from "../MyContext";
 import { useOutsideClick } from '../hooks/outsideClick.hook';
-import PopupList from "./PopupList";
+import PopupForList from "./PopupForList";
 import { Button } from "./Button";
 
 function ListHeader({ note, listTitle, setListTitle }) {
@@ -49,7 +49,7 @@ function ListHeader({ note, listTitle, setListTitle }) {
       }
       <Button text="&middot;&middot;&middot;" func={() => setWorkingWithList(true)} className='list__title-btn' />
       {workingWithList &&
-        <PopupList 
+        <PopupForList 
           setWorkingWithList={setWorkingWithList}
           note={note}
         />

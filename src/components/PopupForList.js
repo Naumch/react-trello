@@ -4,7 +4,7 @@ import { useOutsideClick } from '../hooks/outsideClick.hook';
 import { PopupItem } from "./PopupItem";
 import PopupHeader from "./PopupHeader";
 
-function PopupList({ setWorkingWithList, note }) {
+function PopupForList({ setWorkingWithList, note }) {
   const { notes, setNotes } = useContext(MyContext);
   const [readyToMoveCards, setReadyToMoveCards] = useState(false);
 
@@ -41,28 +41,9 @@ function PopupList({ setWorkingWithList, note }) {
   });
 
   return (
-    <>
-      <div ref={ref} className='popup popup_list'>
-        <PopupHeader 
-          text="Действия со списком"
-          funcClose={() => setWorkingWithList(false)}
-        />
-        <ul className='popup__menu'>
-          <PopupItem 
-            text="Переместить все карточки списка..."
-            func={() => setReadyToMoveCards(true)} 
-          />
-          <PopupItem 
-            text="Удалить все карточки списка..."
-            func={deleteCards}
-          />
-          <PopupItem 
-            text="Удалить список..."
-            func={() => setNotes(notes.filter(elem => elem.id !== note.id))}
-          />
-        </ul>
-        {readyToMoveCards &&
-          <div className="popup popup_list">
+    <div ref={ref} className='popup popup_list'>
+      {readyToMoveCards 
+        ? <>
             <PopupHeader 
               text="Переместить все карточки в список"
               funcBack={() => setReadyToMoveCards(false)}
@@ -71,11 +52,30 @@ function PopupList({ setWorkingWithList, note }) {
             <ul className="popup__menu">
               {items}
             </ul>
-          </div>
-        }  
-      </div>
-    </>
+          </>
+        : <>
+            <PopupHeader 
+              text="Действия со списком"
+              funcClose={() => setWorkingWithList(false)}
+            />
+            <ul className='popup__menu'>
+              <PopupItem 
+                text="Переместить все карточки списка..."
+                func={() => setReadyToMoveCards(true)} 
+              />
+              <PopupItem 
+                text="Удалить все карточки списка..."
+                func={deleteCards}
+              />
+              <PopupItem 
+                text="Удалить список..."
+                func={() => setNotes(notes.filter(elem => elem.id !== note.id))}
+              />
+            </ul>
+          </>
+      }  
+    </div>
   )
 }
 
-export default PopupList;
+export default PopupForList;

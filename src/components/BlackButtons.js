@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import PopupCard from './PopupCard';
+import PopupForCard from './PopupForCard';
 import MyContext from '../MyContext';
 import { Button } from './Button';
 
@@ -43,7 +43,7 @@ export function BlackButtons({ card, note, location, setReadyToEditCard }) {
         />
       </div>
       {readyToMoveCard &&
-        <PopupCard 
+        <PopupForCard 
           setReadyToMoveCard={setReadyToMoveCard}
           card={card}
           note={note}

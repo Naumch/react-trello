@@ -3,7 +3,7 @@ import MyContext from "../MyContext";
 import PopupHeader from "./PopupHeader";
 import { PopupItem } from "./PopupItem";
 
-function PopupCard ({ setReadyToMoveCard, card, note, deleteCard, setReadyToEditCard }) {
+function PopupForCard ({ setReadyToMoveCard, card, note, deleteCard, setReadyToEditCard }) {
   const { notes, setNotes } = useContext(MyContext);
 
   const moveCard = (cardId, currentNoteId, newNoteId) => {
@@ -43,4 +43,4 @@ function PopupCard ({ setReadyToMoveCard, card, note, deleteCard, setReadyToEdit
   )
 }
 
-export default PopupCard;
+export default PopupForCard;
