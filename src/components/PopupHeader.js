@@ -1,21 +1,17 @@
+import { Button } from "./Button";
+
 function PopupHeader(props) {
 
   return(
     <div className="popup__top">
-      <button 
-        onClick={props.funcBack}
+      <Button
+        text="&lsaquo;" 
+        func={props.funcBack}
         className='popup__top-btn popup__top-btn_back'
-        style={{display: `${props.funcBack ? 'block' : 'none'}`}}
-      >
-        &lsaquo;
-      </button>
+        styleObj={{display: `${props.funcBack ? 'block' : 'none'}`}}
+      />
       <p className='popup__top-text'>{props.text}</p>
-      <button 
-        onClick={props.funcClose}
-        className='popup__top-btn'
-      >
-        &#10006;
-      </button>
+      <Button text="&#10006;" func={props.funcClose} className='popup__top-btn'/>
     </div>
   )
 }

@@ -2,6 +2,7 @@ import { useState, useContext } from 'react';
 import uniqid from 'uniqid';
 import MyContext from '../MyContext';
 import { useOutsideClick } from '../hooks/outsideClick.hook';
+import { Button } from './Button';
 
 function BtnAddCard({ note }) {
   const { notes, setNotes } = useContext(MyContext);
@@ -51,29 +52,22 @@ function BtnAddCard({ note }) {
             onChange={e => handleChange(e)}
             onKeyDown={e => checkKeydownEnter(e, cardName)}
           />
-          <button 
-            className='button'
-            onClick={() => {
+          <Button 
+            text="Добавить карточку" 
+            className="button" 
+            func={() => {
               addCard(cardName);
               setCardName('');
-            }}
-          >
-            Добавить карточку
-          </button>
-          <button 
-            className='button-cancel'
-            onClick={stopAddCard}
-          >
-            &#10006;
-          </button>
+            }}/>
+          <Button text="&#10006;" className='button-cancel' func={stopAddCard}/>
         </div>
-      : <button 
-          className='card-add__btn'
-          onClick={() => setReadyToAddCard(true)}
-        >
-          <span className='card-add__btn-span'>+</span>
-          Добавить карточку
-        </button>
+      : <Button 
+          text="Добавить карточку" 
+          icon="+"
+          func={() => setReadyToAddCard(true)}
+          className="card-add__btn"  
+          classNameIcon="card-add__btn-span" 
+        />
   )
 }
 

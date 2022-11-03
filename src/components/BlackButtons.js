@@ -23,17 +23,23 @@ export function BlackButtons({ card, note, location, setReadyToEditCard }) {
             func={() => setReadyToEditCard(false)} 
             icon="&#10004;" 
             text="Открыть карточку"
+            className="button-black"
+            classNameIcon="button-black__icon"
           />
         </Link>
         <Button 
           func={() => setReadyToMoveCard(true)} 
           icon="&#8617;" 
           text="Переместить"
+          className="button-black"
+          classNameIcon="button-black__icon"
         />
         <Button 
           func={() => deleteCard(note.id, card.id)} 
           icon="&#10008;" 
           text="Удалить"
+          className="button-black"
+          classNameIcon="button-black__icon"
         />
       </div>
       {readyToMoveCard &&

@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import MyContext from '../MyContext';
 import { useOutsideClick } from "../hooks/outsideClick.hook";
 import { BlackButtons } from './BlackButtons';
+import { Button } from './Button';
 
 function Card({ card, note }) {
   const { notes, setNotes } = useContext(MyContext);
@@ -38,7 +39,7 @@ function Card({ card, note }) {
           onChange={e => setCardName(e.target.value)}
           onKeyDown={e => checkKeydownEnter(e, note.id, card.id, cardName)}
         />
-        <button onClick={() => editCard(note.id, card.id, cardName)} className='button'>Сохранить</button>
+        <Button text="Сохранить" func={() => editCard(note.id, card.id, cardName)} className="button"/>
         <BlackButtons 
           card={card}
           note={note}
@@ -59,16 +60,14 @@ function Card({ card, note }) {
           {card.cardName}
           {card.descr.length !== 0 && <div style={{marginTop: "2px"}}>&#9776;</div>}
         </Link>
-        <button 
+        <Button
+          text="&#10000;" 
           className='card-edit__btn'
-          style={{opacity: `${opacityBtn}`}}
-          onClick={() => {
+          styleObj={{opacity: `${opacityBtn}`}}
+          func={() => {
             setCardName(card.cardName);
             setReadyToEditCard(true);
-          }}
-        >
-          &#10000;
-        </button>
+          }}/>
       </div>
   )
 }

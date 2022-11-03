@@ -2,8 +2,9 @@ import { useState, useContext } from "react";
 import MyContext from "../MyContext";
 import { useOutsideClick } from '../hooks/outsideClick.hook';
 import PopupList from "./PopupList";
+import { Button } from "./Button";
 
-function HeaderList({ note, listTitle, setListTitle }) {
+function ListHeader({ note, listTitle, setListTitle }) {
   const { notes, setNotes } = useContext(MyContext);
   const [readyToEditList, setReadyToEditList] = useState(false);
   const [workingWithList, setWorkingWithList] = useState(false);
@@ -46,9 +47,7 @@ function HeaderList({ note, listTitle, setListTitle }) {
             {note.listTitle}
           </div>
       }
-      <button onClick={() => setWorkingWithList(true)} className='list__title-btn'>
-        &middot;&middot;&middot;
-      </button>
+      <Button text="&middot;&middot;&middot;" func={() => setWorkingWithList(true)} className='list__title-btn' />
       {workingWithList &&
         <PopupList 
           setWorkingWithList={setWorkingWithList}
@@ -59,4 +58,4 @@ function HeaderList({ note, listTitle, setListTitle }) {
   )
 }
 
-export default HeaderList;
+export default ListHeader;

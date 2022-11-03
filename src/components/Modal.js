@@ -4,6 +4,7 @@ import MyContext from '../MyContext';
 import { useOutsideClick } from '../hooks/outsideClick.hook';
 import ModalHeader from './ModalHeader';
 import ModalDescr from './ModalDescr';
+import ModalCheckList from './ModalCheckList';
 
 function Modal() {
   const navigate = useNavigate();
@@ -33,6 +34,7 @@ function Modal() {
           currentCard={currentCard}
           currentList={currentList}
         />
+        <ModalCheckList />
       </div>
     </div>
   )

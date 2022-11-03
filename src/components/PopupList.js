@@ -35,7 +35,10 @@ function PopupList({ setWorkingWithList, note }) {
     }
   })
 
-  const ref = useOutsideClick(() => setWorkingWithList(false));
+  const ref = useOutsideClick(() => {
+    setWorkingWithList(false);
+    setReadyToMoveCards(false);
+  });
 
   return (
     <>
@@ -58,19 +61,19 @@ function PopupList({ setWorkingWithList, note }) {
             func={() => setNotes(notes.filter(elem => elem.id !== note.id))}
           />
         </ul>
-      </div>  
-      {readyToMoveCards &&
-        <div ref={ref} className="popup popup_list">
-          <PopupHeader 
-            text="Переместить все карточки в список"
-            funcBack={() => setReadyToMoveCards(false)}
-            funcClose={() => setWorkingWithList(false)}
-          />
-          <ul className="popup__menu">
-            {items}
-          </ul>
-        </div>
-      }
+        {readyToMoveCards &&
+          <div className="popup popup_list">
+            <PopupHeader 
+              text="Переместить все карточки в список"
+              funcBack={() => setReadyToMoveCards(false)}
+              funcClose={() => setWorkingWithList(false)}
+            />
+            <ul className="popup__menu">
+              {items}
+            </ul>
+          </div>
+        }  
+      </div>
     </>
   )
 }

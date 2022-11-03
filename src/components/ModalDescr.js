@@ -1,5 +1,6 @@
 import { useState, useContext } from 'react';
 import MyContext from '../MyContext';
+import { Button } from './Button';
 
 function ModalDescr({ currentCard, currentList }) {
   const [value, setValue] = useState(currentCard.descr);
@@ -36,12 +37,11 @@ function ModalDescr({ currentCard, currentList }) {
               value={value}
               onChange={e => setValue(e.target.value)}
             ></textarea>
-            <button 
+            <Button 
+              text="Сохранить"
               className='button' 
-              onClick={() => editDescrCard(currentList.id, currentCard.id, value)}
-            >
-              Сохранить
-            </button> 
+              func={() => editDescrCard(currentList.id, currentCard.id, value)}
+            />
           </>
       } 
     </div>

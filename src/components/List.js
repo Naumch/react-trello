@@ -1,5 +1,5 @@
 import Card from './Card';
-import HeaderList from './HeaderList';
+import ListHeader from './ListHeader';
 import BtnAddCard from './BtnAddCard';
 
 function List({ note, listTitle, setListTitle }) {
@@ -10,7 +10,7 @@ function List({ note, listTitle, setListTitle }) {
 
   return (
     <div className='list'>
-      <HeaderList 
+      <ListHeader 
         note={note}
         listTitle={listTitle}
         setListTitle={setListTitle}
