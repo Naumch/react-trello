@@ -22,11 +22,11 @@ function ModalDescr({ currentCard, currentList }) {
 
   return (
     <div className='modal__description'>
-      <h4 style={{fontWeight: '500'}}>Описание</h4>
+      <h4 className='modal__subtitle'>Описание</h4>
       {readyToEditDescr && currentCard.descr.length !== 0
         ? <p 
             onClick={() => setReadyToEditDescr(false)} 
-            style={{marginTop: "8px", cursor: "pointer"}}
+            style={{cursor: "pointer"}}
           >
             {currentCard.descr}
           </p>

@@ -2,7 +2,7 @@ import { useState, useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import MyContext from '../MyContext';
 import { useOutsideClick } from "../hooks/outsideClick.hook";
-import { BlackButtons } from './BlackButtons';
+import { CardBlackButtons } from './CardBlackButtons';
 import { Button } from './Button';
 
 function Card({ card, note }) {
@@ -32,15 +32,19 @@ function Card({ card, note }) {
 
   return (
     readyToEditCard 
-    ? <div ref={ref} className='box-textarea'>
+    ? <div ref={ref} className='card-edit__box'>
         <textarea 
           value={cardName} 
-          className='textarea'
+          className='card__textarea'
           onChange={e => setCardName(e.target.value)}
           onKeyDown={e => checkKeydownEnter(e, note.id, card.id, cardName)}
         />
-        <Button text="Сохранить" func={() => editCard(note.id, card.id, cardName)} className="button"/>
-        <BlackButtons 
+        <Button 
+          text="Сохранить" 
+          func={() => editCard(note.id, card.id, cardName)} 
+          className="button"
+        />
+        <CardBlackButtons 
           card={card}
           note={note}
           location={location}

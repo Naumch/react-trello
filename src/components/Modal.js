@@ -16,11 +16,7 @@ function Modal() {
   const currentList = notes.filter(elem => elem.id === idList)[0];
   const currentCard = currentList.cards.filter(elem => elem.id === idCard)[0];
 
-  const handleClickOutside = () => {
-    navigate(-1);
-  };
-
-  const ref = useOutsideClick(handleClickOutside);
+  const ref = useOutsideClick(() => navigate(-1));
 
   return (
     <div className="modal-back">

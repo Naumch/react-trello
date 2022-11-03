@@ -1,0 +1,57 @@
+.button {
+  background-color: #0675be;
+  padding: 8px 12px;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+.button:hover {
+  background-color: #0966a5;
+}
+
+.button_transparent {
+  background-color: #3e99cf;
+  width: 275px;
+  padding: 12px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  transition: .5s;
+}
+
+.button_transparent-plus {
+  margin-right: 8px;
+  font-size: 26px;
+  line-height: 0px;
+}
+
+.button_transparent:hover {
+  background-color: #69aed6;
+}
+
+.button-grey {
+  padding: 8px 12px;
+  border-radius: 4px;
+  background-color: #eaecf0;
+  transition: .2s;
+  color: #515d74;
+  font-size: 13px;
+}
+
+.button-grey:hover {
+  background-color: #e3e4e9;
+}
+
+.button-cancel {
+  padding: 8px 12px;
+  border-radius: 4px;
+  color: #515d74;
+  transition: .5s;
+}
+
+.button-cancel:hover {
+  background-color: #e3e4e9;
+}
+
+

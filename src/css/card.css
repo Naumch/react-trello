@@ -1,0 +1,109 @@
+.card {
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .2);
+  cursor: pointer;
+  padding: 4px 4px 4px 8px;
+  margin-top: 8px;
+  font-size: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card:hover {
+  background-color: #efeded;
+}
+
+.card-add__btn {
+  color: #7e828c;
+  padding: 8px 6px;
+  border-radius: 4px;
+  transition: .5s;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.card-add__btn:hover {
+  background-color: #d0d0d0;
+}
+
+.card-add__btn-span {
+  font-size: 24px;
+  line-height: 0;
+  margin-right: 8px;
+}
+
+.card-add__btn-cancel {
+  color: #515d74;
+  font-size: 16px;
+  line-height: 0;
+  transition: .5s;
+}
+  
+.card-add__btn-cancel:hover {
+  font-size: 17px;
+}
+
+.card-edit__btn {
+  color: #000;
+  transition: .3s;
+  border-radius: 4px;
+  padding: 5px 8px;
+  transform: rotate(180deg);
+  font-size: 15px;
+}
+
+.card-edit__btn:hover {
+  background-color: #cecaca;
+}
+
+.card-edit__box {
+  position: relative;
+}
+
+.card__textarea {
+  padding: 6px 8px;
+  border: none;
+  min-height: 60px;
+  width: 100%;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .2);
+  margin-top: 8px;
+  margin-bottom: 8px;
+  resize: vertical;
+  font-size: 15px;
+}
+
+.card__textarea:focus {
+  outline: none;
+}
+
+.card-edit__black-buttons {
+  position: absolute;
+  top: 8px;
+  left: 260px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 200px;
+  z-index: 30;
+}
+
+.button-black {
+  background-color: rgb(27, 26, 26);
+  padding: 4px 10px;
+  border-radius: 4px;
+  margin-bottom: 4px;
+  transition: .5s;
+}
+
+.button-black:hover {
+  margin-left: 6px;
+}
+
+.button-black__icon {
+  margin-right: 6px;
+}

@@ -4,7 +4,7 @@ import PopupForCard from './PopupForCard';
 import MyContext from '../MyContext';
 import { Button } from './Button';
 
-export function BlackButtons({ card, note, location, setReadyToEditCard }) {
+export function CardBlackButtons({ card, note, location, setReadyToEditCard }) {
   const { notes, setNotes } = useContext(MyContext);
   const [readyToMoveCard, setReadyToMoveCard] = useState(false);
 
@@ -14,7 +14,7 @@ export function BlackButtons({ card, note, location, setReadyToEditCard }) {
 
   return (
     <>
-      <div className='wrapper__button-black'> 
+      <div className='card-edit__black-buttons'> 
         <Link 
           to={{pathname: `/card/${note.id}/${card.id}`}} 
           state={{ background: location }}

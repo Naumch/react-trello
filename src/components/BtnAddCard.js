@@ -47,7 +47,7 @@ function BtnAddCard({ note }) {
       ? <div ref={ref}>
           <textarea 
             placeholder='Ввести заголовок для этой карточки'
-            className='textarea'
+            className='card__textarea'
             value={cardName}
             onChange={e => handleChange(e)}
             onKeyDown={e => checkKeydownEnter(e, cardName)}
@@ -59,7 +59,11 @@ function BtnAddCard({ note }) {
               addCard(cardName);
               setCardName('');
             }}/>
-          <Button text="&#10006;" className='button-cancel' func={stopAddCard}/>
+          <Button 
+            text="&#10006;" 
+            className='card-add__btn-cancel' 
+            func={stopAddCard}
+          />
         </div>
       : <Button 
           text="Добавить карточку" 
