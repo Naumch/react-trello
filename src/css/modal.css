@@ -6,12 +6,12 @@
   background-color: rgba(67, 106, 139, 0.8);
   display: flex;
   justify-content: center;
-  padding-top: 100px;
+  padding-top: 60px;
 }
 
 .modal {
   width: 700px;
-  height: 400px;
+  height: 90%;
   background-color: #f4f5f7;
   border-radius: 4px;
   padding: 20px;
@@ -57,7 +57,7 @@
   background-color: #eaecf0;
   transition: .3s;
   margin-bottom: 8px;
-  height: 80px;
+  height: 65px;
   display: block;
   resize: none;
 }

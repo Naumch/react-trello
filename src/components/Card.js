@@ -4,6 +4,7 @@ import MyContext from '../MyContext';
 import { useOutsideClick } from "../hooks/outsideClick.hook";
 import { CardBlackButtons } from './CardBlackButtons';
 import { Button } from './Button';
+import CardIcon from './CardIcon';
 
 function Card({ card, note }) {
   const { notes, setNotes } = useContext(MyContext);
@@ -62,7 +63,7 @@ function Card({ card, note }) {
           style={{flexGrow: 1}}
         >
           {card.cardName}
-          {card.descr.length !== 0 && <div style={{marginTop: "2px"}}>&#9776;</div>}
+          <CardIcon card={card}/>
         </Link>
         <Button
           text="&#10000;" 

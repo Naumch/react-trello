@@ -30,7 +30,10 @@ function Modal() {
           currentCard={currentCard}
           currentList={currentList}
         />
-        <ModalCheckList />
+        <ModalCheckList 
+          currentCard={currentCard}
+          currentList={currentList}
+        />
       </div>
     </div>
   )

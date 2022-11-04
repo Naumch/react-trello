@@ -107,3 +107,9 @@
 .button-black__icon {
   margin-right: 6px;
 }
+
+.card__icon {
+  margin-top: 4px;
+  margin-bottom: 4px;
+  font-size: 13px;
+}

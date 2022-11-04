@@ -13,7 +13,7 @@ function BtnAddCard({ note }) {
     if (cardName.trim().length !== 0) {
       setNotes(notes.map(elem => {
         if (note.id === elem.id) {
-          let obj = {id: uniqid(), cardName: cardName.trim(), descr: ''};
+          let obj = {id: uniqid(), cardName: cardName.trim(), descr: '', checklist: []};
           return {...elem, cards: [...elem.cards, obj]};
         } else {
           return elem;
