@@ -7,6 +7,7 @@ import './css/modal.css';
 import './css/popup.css';
 import './css/list.css';
 import './css/card.css';
+import './css/checklist.css'
 import App from './components/App';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

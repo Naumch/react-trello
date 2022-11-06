@@ -3,6 +3,7 @@ import { Button } from './Button';
 import { useOutsideClick } from '../hooks/outsideClick.hook';
 import MyContext from '../MyContext';
 import uniqid from 'uniqid';
+import Task from './Task';
 
 function ModalCheckList({ currentCard, currentList }) {
   const { notes, setNotes } = useContext(MyContext);
@@ -10,57 +11,35 @@ function ModalCheckList({ currentCard, currentList }) {
   const [value, setValue] = useState('');
 
   const addTaskCard = (noteId, cardId, text) => {
-    let obj = {id: uniqid(), check: false, text: text};
-    let result = {...currentList, cards: [...currentList.cards.map(elem => {
-      if (elem.id === cardId) {
-        return {...elem, checklist: [...elem.checklist, obj]}
-      } else {
-        return elem;
-      }
-    })]}
+    if (text.length !== 0) {
+      let obj = {id: uniqid(), check: false, text: text};
+      let result = {...currentList, cards: [...currentList.cards.map(elem => {
+        if (elem.id === cardId) {
+          return {...elem, checklist: [...elem.checklist, obj]}
+        } else {
+          return elem;
+        }
+      })]}
 
-    setNotes(notes.map(elem => elem.id === noteId ? result : elem));
-    setValue('');
+      setNotes(notes.map(elem => elem.id === noteId ? result : elem));
+      setValue('');
+    }
   }
 
-  const editCheckCard = (noteId, cardId, taskId, check) => {
-    let tasks = currentCard.checklist.map(elem => {
-      if (elem.id === taskId) {
-        return {...elem, check: !check}
-      } else {
-        return elem
-      }
-    })
-    let result = {...currentList, cards: [...currentList.cards.map(elem => {
-      if (elem.id === cardId) {
-        return {...elem, checklist: tasks}
-      } else {
-        return elem
-      }
-    })]}
-    setNotes(notes.map(elem => elem.id === noteId ? result : elem))
+  const checkKeydownEnter = (e, noteId, cardId, text) => {
+    if (e.keyCode === 13) {
+      addTaskCard(noteId, cardId, text)
+    }
   }
 
-  const tasks = currentCard.checklist.map(elem => {
+  const tasks = currentCard.checklist.map(task => {
     return (
-      <li key={elem.id}>
-        <input
-          type="checkbox" 
-          checked={elem.check} 
-          id="check"
-          onChange={() => editCheckCard(currentList.id, currentCard.id, elem.id, elem.check)}
-        />
-        <label 
-          htmlFor='check' 
-          style={{
-            color: `${elem.check ? "#515d74" : "#000"}`,
-            textDecoration: `${elem.check ? "line-through" : "none"}`,
-            marginLeft: "8px" 
-          }}
-        >
-          {elem.text}
-        </label>
-      </li>
+      <Task
+        key={task.id}
+        task={task}
+        currentCard={currentCard}
+        currentList={currentList}
+      />
     )
   })
 
@@ -77,6 +56,7 @@ function ModalCheckList({ currentCard, currentList }) {
               className='modal__input'
               value={value}
               onChange={e => setValue(e.target.value)}
+              onKeyDown={e => checkKeydownEnter(e, currentList.id, currentCard.id, value)}
             />
             <Button
               text="Добавить"

@@ -1,0 +1,52 @@
+.checklist__item {
+  padding: 10px;
+  transition: .3s;
+  border-radius: 4px;
+  width: 80%;
+  cursor: pointer;
+  display: flex;
+  align-items: flex-start;
+}
+
+.checklist__item:hover {
+  background-color: #eaecf0;
+}
+
+.checklist__label {
+  margin-left: 8px;
+  flex-grow: 1;
+}
+
+.checklist__btn-delete {
+  color: #000;
+  transition: .3s;
+  padding: 3px 6px;
+  border-radius: 4px;
+}
+
+.checklist__btn-delete:hover {
+  background-color: #cecaca;
+}
+
+.checklist-edit__box {
+  flex-grow: 1; 
+  padding: 0 10px; 
+  cursor: auto;
+}
+
+.checklist-edit__input {
+  width: 100%;
+  padding: 6px 10px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  background-color: #e3e4e9;
+  border: none;
+}
+
+.checklist-edit__input:focus {
+  outline: none;
+}
+
+.checklist-edit__btn-cancel {
+  color: #000;
+}
